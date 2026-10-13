@@ -5,11 +5,13 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# SPA Fallback: Route any direct subpath navigation to index.html
+# Routing: Serve custom branded 404 page with HTTP 404 for any unmatched routes
+# Existing static files (/, /for-freelance-agencies/, /building-in-public/, /assets/*)
+# are served directly by Netlify before this redirect rule is evaluated.
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "/404.html"
+  status = 404
 
 # Global Security Headers
 [[headers]]
@@ -23,7 +25,12 @@
 
 # HTML: Revalidate immediately so new deployments appear without stale caching
 [[headers]]
-  for = "/index.html"
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
@@ -43,3 +50,14 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Static Images: Conservative caching with stale-while-revalidate
+[[headers]]
+  for = "/shots/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/og-image.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"

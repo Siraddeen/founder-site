@@ -36,7 +36,7 @@ export const features = [
 ];
 
 export const status = [
-  ["Built and tested", "Core CRM, billing, public API, audit log, and workspace lifecycle all work. 20+ versions shipped, 500+ automated tests, and each version is checked against a live database before it is locked."],
+  ["Built and tested", "Core CRM, billing, public API, audit log, and workspace lifecycle all work. Actively versioned through incremental milestone builds with automated test coverage, and checked against a live database before locking each build."],
   ["Not yet", "No paying customers and no outside pilot users so far. Some billing paths, such as live subscription overlap and replayed webhooks, are covered by tests but not yet exercised with real provider subscriptions."],
   ["Next", "Put it in front of the first 3 to 5 freelancers or small agencies, on their real work, and fix what gets in their way."],
 ];
