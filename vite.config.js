@@ -24,21 +24,35 @@ function netlifyFormsDevPlugin() {
           const botField = params.get("bot-field");
 
           if (botField) {
-            // Honeypot spam drop
+            // Honeypot spam drop in local mock
             res.statusCode = 200;
-            res.setHeader("Content-Type", "text/plain");
-            return res.end("OK (spam filtered)");
+            res.setHeader("Content-Type", "application/json");
+            res.setHeader("X-Local-Mock", "true");
+            return res.end(
+              JSON.stringify({
+                mock: true,
+                spam: true,
+                message: "Local test successful — no application was sent or stored.",
+              })
+            );
           }
 
           if (!name || !email) {
             res.statusCode = 400;
             res.setHeader("Content-Type", "text/plain");
+            res.setHeader("X-Local-Mock", "true");
             return res.end("Bad Request: Missing required name or email");
           }
 
           res.statusCode = 200;
-          res.setHeader("Content-Type", "text/plain");
-          return res.end("OK - Netlify Forms accepted submission");
+          res.setHeader("Content-Type", "application/json");
+          res.setHeader("X-Local-Mock", "true");
+          return res.end(
+            JSON.stringify({
+              mock: true,
+              message: "Local test successful — no application was sent or stored.",
+            })
+          );
         }
         next();
       });

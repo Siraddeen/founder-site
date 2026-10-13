@@ -47,7 +47,11 @@ export default function PilotForm({ id = "pilot-form" }) {
 
     // Honeypot spam check - silent exit if bot filled it out
     if (formData.botField) {
-      setSubmissionStatus("success");
+      const isLocal =
+        typeof window !== "undefined" &&
+        (window.location.hostname === "localhost" ||
+          window.location.hostname === "127.0.0.1");
+      setSubmissionStatus(isLocal ? "local-mock" : "success");
       return;
     }
 
@@ -77,7 +81,8 @@ export default function PilotForm({ id = "pilot-form" }) {
       });
 
       if (response.ok) {
-        setSubmissionStatus("success");
+        const isMock = response.headers.get("X-Local-Mock") === "true";
+        setSubmissionStatus(isMock ? "local-mock" : "success");
       } else {
         setSubmissionStatus("error");
         setErrorMessage(
@@ -110,7 +115,59 @@ export default function PilotForm({ id = "pilot-form" }) {
 
   return (
     <div id={id} className="rounded-2xl border border-teal/25 bg-white p-6 shadow-sm sm:p-8">
-      {submissionStatus === "success" ? (
+      {submissionStatus === "local-mock" ? (
+        <div
+          role="status"
+          aria-live="polite"
+          className="rounded-xl border border-amber/40 bg-amber-soft/80 p-6 text-ink"
+        >
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber text-white">
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </span>
+            <div>
+              <h4 className="font-display text-lg font-bold text-ink">
+                Local test successful — no application was sent or stored.
+              </h4>
+              <p className="text-xs font-semibold text-amber-dark">
+                Vite local preview mock
+              </p>
+            </div>
+          </div>
+
+          <p className="mt-4 text-sm leading-relaxed text-ink/80 sm:text-base">
+            Your form inputs, validation, and submission flow functioned properly. Because you are
+            testing in a local development or preview environment, this submission was handled by the
+            Vite local mock and was not sent to Netlify Forms or stored.
+          </p>
+
+          <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-amber/30 pt-4 text-xs text-muted">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="font-medium text-ink underline underline-offset-2 hover:text-teal"
+            >
+              Reset form and test again
+            </button>
+            <span>·</span>
+            <span>
+              Real submissions are processed only when deployed to Netlify.
+            </span>
+          </div>
+        </div>
+      ) : submissionStatus === "success" ? (
         <div
           role="status"
           aria-live="polite"
