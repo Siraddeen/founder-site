@@ -43,6 +43,8 @@ export default function PilotForm({ id = "pilot-form" }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (isSubmitting) return;
+
     // Honeypot spam check - silent exit if bot filled it out
     if (formData.botField) {
       setSubmissionStatus("success");
@@ -167,6 +169,7 @@ export default function PilotForm({ id = "pilot-form" }) {
         <form
           name="pilot-interest"
           method="POST"
+          action="/"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           onSubmit={handleSubmit}

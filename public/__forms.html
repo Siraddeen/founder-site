@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Netlify Form Detection Skeleton</title>
+  </head>
+  <body>
+    <!--
+      This static document provides build-time detection for Netlify Forms.
+      It ensures Netlify's crawler registers the 'pilot-interest' form and all fields.
+    -->
+    <form
+      name="pilot-interest"
+      method="POST"
+      action="/"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="hidden" name="form-name" value="pilot-interest" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="roleOrTeamSize" />
+      <input type="text" name="currentTool" />
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>
