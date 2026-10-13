@@ -1,0 +1,6 @@
+# Allow legitimate crawling of public marketing site
+User-agent: *
+Allow: /
+
+# Production sitemap
+Sitemap: https://siraddeen.in/sitemap.xml
