@@ -11,6 +11,9 @@ import {
   projects,
   stack,
 } from "./site.js";
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
+import PilotForm from "./components/PilotForm.jsx";
 
 const ext = { target: "_blank", rel: "noreferrer noopener" };
 
@@ -236,177 +239,6 @@ function Section({ id, title, subtitle, children }) {
   );
 }
 
-function Nav() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  // Close mobile menu on Escape key
-  useEffect(() => {
-    function handleKeyDown(e) {
-      if (e.key === "Escape") setIsOpen(false);
-    }
-    if (isOpen) {
-      window.addEventListener("keydown", handleKeyDown);
-      return () => window.removeEventListener("keydown", handleKeyDown);
-    }
-  }, [isOpen]);
-
-  const closeMenu = () => setIsOpen(false);
-
-  return (
-    <header className="sticky top-0 z-40 w-full border-b border-line/60 bg-paper/90 backdrop-blur-md transition-all">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <a
-          href="#top"
-          className="flex items-center gap-2 group"
-          onClick={closeMenu}
-        >
-          <span className="font-display text-lg font-bold text-ink group-hover:text-teal transition-colors">
-            {person.name}
-          </span>
-          <span className="hidden xs:inline-block rounded-full border border-teal/20 bg-teal/10 px-2 py-0.5 text-[11px] font-medium text-teal-dark">
-            Founder & Developer
-          </span>
-        </a>
-
-        {/* Desktop Navigation */}
-        <nav
-          aria-label="Main"
-          className="hidden items-center gap-6 text-sm font-medium text-muted md:flex"
-        >
-          <a href="#demo" className="transition-colors hover:text-ink">
-            See it working
-          </a>
-          <a href="#crm" className="transition-colors hover:text-ink">
-            The CRM
-          </a>
-          <a href="#status" className="transition-colors hover:text-ink">
-            Status
-          </a>
-          <a href="#projects" className="transition-colors hover:text-ink">
-            Other work
-          </a>
-          <a href="#about" className="transition-colors hover:text-ink">
-            About
-          </a>
-          <a
-            href="#contact"
-            className="rounded-full bg-ink px-4 py-2 text-xs font-semibold text-paper shadow-xs transition-colors hover:bg-teal focus-visible:outline-teal"
-          >
-            Contact
-          </a>
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <div className="flex items-center gap-3 md:hidden">
-          <a
-            href="#contact"
-            className="inline-flex min-h-[36px] items-center rounded-full bg-ink px-3.5 py-1.5 text-xs font-semibold text-paper hover:bg-teal transition-colors focus-visible:outline-teal"
-            onClick={closeMenu}
-          >
-            Contact
-          </a>
-          <button
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-expanded={isOpen}
-            aria-controls="mobile-menu"
-            aria-label="Toggle navigation menu"
-            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg p-2.5 text-ink hover:bg-black/5 focus-visible:outline-teal"
-          >
-            {isOpen ? (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Dropdown Menu */}
-      {isOpen && (
-        <div
-          id="mobile-menu"
-          className="border-b border-line bg-paper/95 px-5 py-4 shadow-lg backdrop-blur-md md:hidden"
-        >
-          <nav
-            aria-label="Mobile"
-            className="flex flex-col space-y-3 text-base font-medium text-ink"
-          >
-            <a
-              href="#demo"
-              onClick={closeMenu}
-              className="rounded-md px-2 py-1.5 hover:bg-black/5 hover:text-teal transition-colors"
-            >
-              See it working
-            </a>
-            <a
-              href="#crm"
-              onClick={closeMenu}
-              className="rounded-md px-2 py-1.5 hover:bg-black/5 hover:text-teal transition-colors"
-            >
-              The CRM
-            </a>
-            <a
-              href="#status"
-              onClick={closeMenu}
-              className="rounded-md px-2 py-1.5 hover:bg-black/5 hover:text-teal transition-colors"
-            >
-              Status & Pilot
-            </a>
-            <a
-              href="#projects"
-              onClick={closeMenu}
-              className="rounded-md px-2 py-1.5 hover:bg-black/5 hover:text-teal transition-colors"
-            >
-              Other work
-            </a>
-            <a
-              href="#about"
-              onClick={closeMenu}
-              className="rounded-md px-2 py-1.5 hover:bg-black/5 hover:text-teal transition-colors"
-            >
-              About founder
-            </a>
-            <div className="pt-2">
-              <a
-                href={pilotMail}
-                onClick={closeMenu}
-                className="block w-full rounded-full bg-teal py-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-teal-dark transition-colors"
-              >
-                {pilot.button}
-              </a>
-            </div>
-          </nav>
-        </div>
-      )}
-    </header>
-  );
-}
-
 function Hero({ onZoom }) {
   return (
     <section
@@ -439,7 +271,7 @@ function Hero({ onZoom }) {
         {/* CTA Group with clear primary/secondary hierarchy */}
         <div className="mt-8 flex flex-wrap items-center gap-3.5">
           <a
-            href={pilotMail}
+            href="#pilot-form"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-teal px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-teal-dark focus-visible:outline-teal"
           >
             <span>{pilot.button}</span>
@@ -528,6 +360,26 @@ function Hero({ onZoom }) {
             </svg>
             Zero sales pressure
           </span>
+        </div>
+
+        {/* Contextual internal links */}
+        <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-xl border border-line/60 bg-white/70 px-4 py-3 text-xs text-muted">
+          <span className="font-semibold text-ink">Read more:</span>
+          <a
+            href="/for-freelance-agencies/"
+            className="inline-flex items-center gap-1 font-medium text-teal hover:text-teal-dark hover:underline underline-offset-2"
+          >
+            <span>Why Agencies Need a Dedicated CRM</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <span className="hidden text-line sm:inline">•</span>
+          <a
+            href="/building-in-public/"
+            className="inline-flex items-center gap-1 font-medium text-teal hover:text-teal-dark hover:underline underline-offset-2"
+          >
+            <span>Building in Public Journal</span>
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
       </div>
 
@@ -645,7 +497,7 @@ export default function App() {
         Skip to content
       </a>
 
-      <Nav />
+      <Header currentPath="/" />
 
       <main id="main-content" tabIndex={-1} className="outline-none">
         <Hero onZoom={handleZoom} />
@@ -676,6 +528,27 @@ export default function App() {
                 </p>
               </div>
             ))}
+          </div>
+
+          {/* Contextual link to For Agencies page */}
+          <div className="mt-8 rounded-xl border border-line bg-white/80 p-5 shadow-xs sm:p-6">
+            <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+              <div>
+                <h4 className="font-display text-base font-bold text-ink">
+                  Curious about the full agency workflow?
+                </h4>
+                <p className="mt-1 text-sm text-muted">
+                  See how this architecture solves common agency bottlenecks from pitch to payment.
+                </p>
+              </div>
+              <a
+                href="/for-freelance-agencies/"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-teal/30 bg-teal/10 px-4 py-2 text-xs font-semibold text-teal-dark hover:bg-teal hover:text-white transition-colors"
+              >
+                <span>Read Agency Workflow Guide</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
           </div>
         </Section>
 
@@ -721,8 +594,29 @@ export default function App() {
             })}
           </div>
 
+          {/* Contextual link to Building in Public journal */}
+          <div className="mt-6 rounded-xl border border-line bg-white/80 p-5 shadow-xs sm:p-6">
+            <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+              <div>
+                <h4 className="font-display text-base font-bold text-ink">
+                  Transparent engineering progress
+                </h4>
+                <p className="mt-1 text-sm text-muted">
+                  Follow technical milestones, architectural choices, and what remains under active development.
+                </p>
+              </div>
+              <a
+                href="/building-in-public/"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-teal/30 bg-teal/10 px-4 py-2 text-xs font-semibold text-teal-dark hover:bg-teal hover:text-white transition-colors"
+              >
+                <span>Read Development Journal</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+
           {/* Pilot Invitation Card */}
-          <div className="mt-8 rounded-2xl border border-teal/30 bg-gradient-to-br from-teal-soft/80 via-white to-teal-soft/30 p-6 shadow-sm sm:p-8">
+          <div id="pilot" className="mt-8 rounded-2xl border border-teal/30 bg-gradient-to-br from-teal-soft/80 via-white to-teal-soft/30 p-6 shadow-sm sm:p-8">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-teal px-3 py-1 text-xs font-semibold text-white">
                 ★ Early Pilot Invitation
@@ -760,35 +654,8 @@ export default function App() {
               </div>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-4">
-              <a
-                href={pilotMail}
-                className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-paper shadow-md transition-all hover:bg-teal hover:text-white focus-visible:outline-teal"
-              >
-                <span>{pilot.button}</span>
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
-              </a>
-              <span className="text-xs text-muted">
-                Or email directly:{" "}
-                <a
-                  href={`mailto:${person.email}`}
-                  className="font-semibold text-ink underline hover:text-teal"
-                >
-                  {person.email}
-                </a>
-              </span>
+            <div className="mt-8">
+              <PilotForm id="pilot-form" />
             </div>
           </div>
         </Section>
@@ -880,86 +747,8 @@ export default function App() {
         </Section>
       </main>
 
-      {/* Footer */}
-      <footer
-        id="contact"
-        className="border-t border-line/40 bg-night text-paper"
-      >
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-14">
-          <div>
-            <h2 className="font-display text-2xl font-bold text-white md:text-3xl">
-              Talk to me
-            </h2>
-            <p className="mt-2 text-xs font-mono text-[#7F93AB]">
-              Founder-direct communication
-            </p>
-          </div>
-          <div>
-            <p className="max-w-xl text-base leading-relaxed text-[#C9D6E4]">
-              Run a freelance practice or a small agency and want to try the
-              CRM, or just have feedback? Email me directly.
-            </p>
-            <div className="mt-4 flex flex-wrap items-center gap-3">
-              <a
-                href={"mailto:" + person.email}
-                className="inline-flex items-center gap-2 font-display text-xl font-bold text-white underline underline-offset-4 transition-colors hover:text-[#5FD0D8]"
-              >
-                <svg
-                  className="h-5 w-5 text-teal-soft"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-                <span>{person.email}</span>
-              </a>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
-              {links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  {...ext}
-                  className="inline-flex items-center gap-1 text-[#9FD9DE] underline underline-offset-4 transition-colors hover:text-white"
-                >
-                  <span>{l.label}</span>
-                  <svg
-                    className="h-3 w-3 opacity-70"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M7 17L17 7M17 7H7M17 7V17"
-                    />
-                  </svg>
-                </a>
-              ))}
-            </div>
-            <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 text-xs text-[#7F93AB] sm:flex-row sm:items-center">
-              <p>
-                © {new Date().getFullYear()} {person.name}. An independent,
-                bootstrapped project, not an incorporated company.
-              </p>
-              <a
-                href="#top"
-                className="underline underline-offset-2 transition-colors hover:text-white"
-              >
-                Back to top ↑
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      {/* Shared Footer */}
+      <Footer />
 
       {/* Lightbox Modal */}
       {activeShot && (

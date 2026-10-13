@@ -2,7 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://siraddeen.in/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://siraddeen.in/for-freelance-agencies/</loc>
+  </url>
+  <url>
+    <loc>https://siraddeen.in/building-in-public/</loc>
   </url>
 </urlset>
