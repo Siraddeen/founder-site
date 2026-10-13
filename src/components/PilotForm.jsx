@@ -81,7 +81,13 @@ export default function PilotForm({ id = "pilot-form" }) {
       });
 
       if (response.ok) {
-        const isMock = response.headers.get("X-Local-Mock") === "true";
+        const isLocal =
+          typeof window !== "undefined" &&
+          (window.location.hostname === "localhost" ||
+            window.location.hostname === "127.0.0.1" ||
+            window.location.hostname === "0.0.0.0");
+        const isMock =
+          response.headers.get("X-Local-Mock") === "true" || isLocal;
         setSubmissionStatus(isMock ? "local-mock" : "success");
       } else {
         setSubmissionStatus("error");
@@ -197,9 +203,8 @@ export default function PilotForm({ id = "pilot-form" }) {
 
           <p className="mt-4 text-sm leading-relaxed text-ink/90 sm:text-base">
             Thank you, <strong className="font-semibold text-ink">{formData.name}</strong>. I have
-            received your interest for testing the CRM. I will personally review your agency workflow
-            details and reply directly to{" "}
-            <strong className="font-semibold text-ink">{formData.email}</strong> within 24–48 hours.
+            received your interest for testing the CRM. I’ll review your application and get back to you at{" "}
+            <strong className="font-semibold text-ink">{formData.email}</strong> as soon as I can.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-teal/20 pt-4 text-xs text-muted">
@@ -428,9 +433,8 @@ export default function PilotForm({ id = "pilot-form" }) {
                 />
               </svg>
               <span>
-                <strong>Privacy guarantee:</strong> Submitted information is used exclusively by
-                Siraddeen to evaluate pilot eligibility and reply directly. No marketing lists or
-                third-party tracking.
+                <strong>Privacy:</strong> Your information will be used to review your pilot application
+                and contact you about participation.
               </span>
             </p>
           </div>
