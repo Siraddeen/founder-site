@@ -233,7 +233,7 @@ export default function PilotForm({ id = "pilot-form" }) {
           method="POST"
           action="/"
           data-netlify="true"
-          data-netlify-honeypot="bot-field"
+          netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
           noValidate
           className="space-y-4"
