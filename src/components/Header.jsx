@@ -18,20 +18,37 @@ export default function Header({ currentPath = "/" }) {
   const isHome = currentPath === "/";
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-line/60 bg-paper/90 backdrop-blur-md transition-all">
+    <header className="sticky top-0 z-40 w-full border-b border-line/70 bg-paper/95 backdrop-blur-md shadow-xs transition-all">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <a
-          href={isHome ? "#top" : "/"}
-          className="group flex items-center gap-2"
-          onClick={closeMenu}
-        >
-          <span className="font-display text-lg font-bold text-ink transition-colors group-hover:text-teal">
-            {person.name}
-          </span>
-          <span className="hidden rounded-full border border-teal/20 bg-teal/10 px-2 py-0.5 text-[11px] font-medium text-teal-dark xs:inline-block">
-            Founder & Developer
-          </span>
-        </a>
+        <div className="flex items-center gap-2">
+          <a
+            href={isHome ? "#top" : "/"}
+            className="group flex items-center gap-2"
+            onClick={closeMenu}
+          >
+            <span className="font-display text-lg font-bold text-ink transition-colors group-hover:text-teal">
+              {person.name}
+            </span>
+            <span className="hidden rounded-full border border-teal/20 bg-teal/10 px-2 py-0.5 text-[11px] font-medium text-teal-dark xs:inline-block">
+              Founder & Developer
+            </span>
+          </a>
+          <a
+            href="/about/"
+            className="about-neon-link hidden xs:inline-flex"
+            title="About R. Siraddeen — Cinematic Showcase"
+          >
+            <span className="about-neon-border-wrapper" aria-hidden="true">
+              <span className="about-neon-track" />
+            </span>
+            <span className="about-neon-inner">
+              <span>About me</span>
+              <span aria-hidden="true" className="text-[20px]">
+                ↗
+              </span>
+            </span>
+          </a>
+        </div>
 
         {/* Desktop Navigation */}
         <nav

@@ -5,6 +5,7 @@ export default {
     "./404.html",
     "./for-freelance-agencies/**/*.html",
     "./building-in-public/**/*.html",
+    "./about/**/*.html",
     "./src/**/*.{js,jsx}",
   ],
   theme: {
