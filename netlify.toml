@@ -6,7 +6,7 @@
   NODE_VERSION = "20"
 
 # Routing: Serve custom branded 404 page with HTTP 404 for any unmatched routes
-# Existing static files (/, /for-freelance-agencies/, /building-in-public/, /assets/*)
+# Existing static files (/, /for-freelance-agencies/, /building-in-public/, /about/, /assets/*)
 # are served directly by Netlify before this redirect rule is evaluated.
 [[redirects]]
   from = "/*"

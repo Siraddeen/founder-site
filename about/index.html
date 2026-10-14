@@ -1,0 +1,1856 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#02040a" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="https://siraddeen.in/about/" />
+
+    <title>R. Siraddeen — About Me | Full-Stack Developer</title>
+    <meta
+      name="description"
+      content="Cinematic developer showcase of R. Siraddeen — Solo Founder & Full-Stack Developer. 108-second animated presentation of architecture, engineering workflow, and production work with synthesized audio."
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://siraddeen.in/about/" />
+    <meta property="og:title" content="R. Siraddeen — About Me | Full-Stack Developer" />
+    <meta
+      property="og:description"
+      content="Cinematic developer showcase: engineering process, full-stack architecture, and production software."
+    />
+    <meta property="og:image" content="https://siraddeen.in/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="R. Siraddeen" />
+
+    <!-- Twitter / X Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="R. Siraddeen — About Me | Full-Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="Cinematic developer showcase: engineering process, full-stack architecture, and production software."
+    />
+    <meta name="twitter:image" content="https://siraddeen.in/og-image.png" />
+
+    <!-- Typography Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #02040a;
+        overflow: hidden;
+        font: 14px Poppins, system-ui, -apple-system, sans-serif;
+        color: #cfe8f5;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* 16:9 Canvas presentation */
+      #c {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: min(100vw, 177.78vh);
+        height: min(56.25vw, 100vh);
+        display: block;
+      }
+
+      /* Top minimal navigation header */
+      #top-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        padding-top: calc(12px + env(safe-area-inset-top, 0px));
+        z-index: 20;
+        background: linear-gradient(to bottom, rgba(2, 4, 10, 0.85) 0%, transparent 100%);
+        pointer-events: none;
+      }
+      #top-nav .back-link {
+        pointer-events: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: #cfe8f5;
+        text-decoration: none;
+        font-family: Poppins, system-ui, sans-serif;
+        font-weight: 500;
+        font-size: 13px;
+        background: rgba(14, 26, 43, 0.85);
+        border: 1px solid rgba(34, 211, 238, 0.3);
+        padding: 6px 14px;
+        border-radius: 9999px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: all 0.2s ease;
+      }
+      #top-nav .back-link:hover {
+        background: rgba(11, 110, 117, 0.9);
+        border-color: #22d3ee;
+        color: #ffffff;
+      }
+      #top-nav .back-arrow {
+        color: #22d3ee;
+        font-weight: bold;
+        transition: transform 0.2s ease;
+      }
+      #top-nav .back-link:hover .back-arrow {
+        transform: translateX(-2px);
+      }
+      #top-nav .nav-brand {
+        font-family: 'JetBrains Mono', Consolas, monospace;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        color: #9fb4c8;
+        opacity: 0.8;
+      }
+
+      /* Playback controls bar */
+      #bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        padding: 12px 18px;
+        padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        background: linear-gradient(to top, rgba(2, 4, 10, 0.95) 0%, rgba(2, 4, 10, 0.6) 60%, transparent 100%);
+        z-index: 20;
+      }
+      #bar button,
+      #go button {
+        background: #0e1a2b;
+        border: 1px solid rgba(34, 211, 238, 0.5);
+        color: #e6f7ff;
+        border-radius: 8px;
+        padding: 7px 14px;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 500;
+        transition: background 0.15s, border-color 0.15s, color 0.15s;
+      }
+      #bar button:hover,
+      #go button:hover {
+        background: #14314a;
+        border-color: #22d3ee;
+        color: #ffffff;
+      }
+      #bar button:focus-visible,
+      #go button:focus-visible {
+        outline: 2px solid #22d3ee;
+        outline-offset: 2px;
+      }
+
+      #pg {
+        flex: 1;
+        min-width: 40px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.14);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      #pf {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #22d3ee, #8b5cf6);
+      }
+      #tm {
+        font-family: 'JetBrains Mono', Consolas, monospace;
+        font-size: 13px;
+        font-variant-numeric: tabular-nums;
+        color: #cfe8f5;
+        white-space: nowrap;
+      }
+
+      /* Explicit Play Overlay */
+      #go {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-content: center;
+        gap: 16px;
+        text-align: center;
+        background: rgba(2, 4, 10, 0.82);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        padding: 20px;
+        z-index: 15;
+      }
+      #go-title {
+        font: 600 13px 'JetBrains Mono', Consolas, monospace;
+        letter-spacing: 0.25em;
+        color: #22d3ee;
+        max-width: 90vw;
+        line-height: 1.5;
+      }
+      #go button {
+        font: 600 20px Poppins, system-ui, sans-serif;
+        padding: 16px 36px;
+        border-radius: 12px;
+        border-color: #22d3ee;
+        box-shadow: 0 0 25px rgba(34, 211, 238, 0.25);
+      }
+      #go-subtitle {
+        font-size: 13px;
+        opacity: 0.7;
+        max-width: 320px;
+        margin: 0 auto;
+        line-height: 1.4;
+      }
+
+      /* Mobile optimizations */
+      @media (max-width: 480px) {
+        #top-nav .nav-brand {
+          display: none;
+        }
+        #top-nav .back-link {
+          font-size: 12px;
+          padding: 5px 12px;
+        }
+        #bar {
+          gap: 8px;
+          padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+        }
+        #bar button {
+          padding: 6px 10px;
+          font-size: 12px;
+        }
+        #tm {
+          font-size: 11px;
+        }
+        #go-title {
+          font-size: 11px;
+          letter-spacing: 0.12em;
+        }
+        #go button {
+          font-size: 17px;
+          padding: 14px 26px;
+        }
+        #go-subtitle {
+          font-size: 12px;
+        }
+      }
+
+      /* Export rendering hook */
+      body.x #top-nav,
+      body.x #bar,
+      body.x #go {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Navigation Header -->
+    <header id="top-nav">
+      <a href="/" class="back-link">
+        <span class="back-arrow" aria-hidden="true">←</span>
+        <span>Return to Homepage</span>
+      </a>
+      <span class="nav-brand">R. SIRADDEEN · ABOUT</span>
+    </header>
+
+    <!-- Canvas player element -->
+    <canvas id="c"></canvas>
+
+    <!-- Initial Play Overlay (Audio requires explicit user gesture) -->
+    <div id="go">
+      <div id="go-title">R. SIRADDEEN · CINEMATIC SHOWCASE · 1:48</div>
+      <div>
+        <button id="play" type="button">▶ Play with sound</button>
+      </div>
+      <div id="go-subtitle">Instrumental, synthesized audio. No voice.</div>
+    </div>
+
+    <!-- Playback control bar -->
+    <div id="bar">
+      <button id="rp" type="button" aria-label="Replay presentation">↺ Replay</button>
+      <button id="mu" type="button" aria-label="Toggle sound">🔊 Sound on</button>
+      <div id="pg" aria-hidden="true"><div id="pf"></div></div>
+      <span id="tm" aria-label="Playback timer">0:00 / 1:48</span>
+    </div>
+
+    <script>
+      const W = 1920,
+        H = 1080,
+        T = 108,
+        SANS = "Poppins,'Segoe UI',system-ui,sans-serif",
+        MONO = "'JetBrains Mono','DejaVu Sans Mono',Consolas,monospace",
+        CY = "#22d3ee",
+        VI = "#8b5cf6",
+        DIM = "#9fb4c8";
+      const cl = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)),
+        sg = (t, a, b) => cl((t - a) / (b - a)),
+        eo = (x) => 1 - (1 - x) ** 3,
+        eio = (x) => (x < 0.5 ? 4 * x ** 3 : 1 - (-2 * x + 2) ** 3 / 2),
+        bk = (x) => 1 + 2.70158 * (x - 1) ** 3 + 1.70158 * (x - 1) ** 2,
+        vis = (t, a, b, i = 0.5, o = 0.5) => sg(t, a, a + i) * (1 - sg(t, b - o, b)),
+        lp = (a, b, x) => a + (b - a) * x;
+      const R = (i) => {
+        let t = Math.imul(Math.floor(i) + 1, 0x9e3779b9);
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+
+      // ---- shared timeline cues (used by BOTH visuals and audio) ----
+      const IMP = [
+        [3.6, 1],
+        [20, 0.7],
+        [35, 0.7],
+        [48, 1],
+        [72, 0.6],
+        [85, 0.7],
+        [98.4, 1.3],
+      ];
+      const S3 = [21.4, 24.1, 26.8, 29.5, 32.2],
+        CL = [36.2, 38.6, 41, 43.4],
+        KAN = [51, 52.8, 54.6, 56.2],
+        ARI = [61.6, 62.6, 63, 64.2, 64.5],
+        JOB = [66.8, 67.5, 68.2, 68.9],
+        ST6 = [72.6, 75.6, 78.6, 81.6],
+        SV = [85.8, 86.7, 87.6, 88.5, 89.4];
+      const pulse = (t) =>
+        IMP.reduce((s, [a]) => s + (t >= a ? Math.exp(-(t - a) * 3.2) : 0), 0);
+
+      // ---- draw helpers ----
+      function tx(c, s, x, y, z, o = {}) {
+        c.save();
+        c.globalAlpha *= o.a ?? 1;
+        c.font = `${o.w || 700} ${z}px ${o.f || SANS}`;
+        c.textAlign = o.al || "center";
+        c.textBaseline = "middle";
+        c.letterSpacing = (o.ls || 0) + "px";
+        c.fillStyle = o.c || "#eaf6ff";
+        if (o.sh) {
+          c.shadowColor = o.sh;
+          c.shadowBlur = o.sb || 30;
+        }
+        c.fillText(s, x, y);
+        c.restore();
+      }
+      function rev(c, s, x, y, z, t0, t, o = {}) {
+        const st = o.st || 0.05,
+          ls = o.ls || 0;
+        c.save();
+        c.font = `${o.w || 700} ${z}px ${o.f || SANS}`;
+        c.textBaseline = "middle";
+        c.textAlign = "left";
+        c.letterSpacing = "0px";
+        const ch = [...s],
+          ws = ch.map((k) => c.measureText(k).width + ls),
+          tot = ws.reduce((a, b) => a + b, 0) - ls;
+        let px = o.al == "left" ? x : x - tot / 2;
+        ch.forEach((k, i) => {
+          const p = eo(sg(t, t0 + i * st, t0 + i * st + 0.6));
+          if (p > 0) {
+            c.globalAlpha = ((o.a ?? 1) * p * c.globalAlpha) / (c.globalAlpha || 1);
+            c.fillStyle = o.c || "#eaf6ff";
+            if (o.sh) {
+              c.shadowColor = o.sh;
+              c.shadowBlur = o.sb || 30;
+            }
+            c.fillText(k, px, y + (1 - p) * 30);
+          }
+          px += ws[i];
+        });
+        c.restore();
+      }
+      function pn(c, x, y, w, h, o = {}) {
+        c.save();
+        c.beginPath();
+        c.roundRect(x, y, w, h, o.r ?? 18);
+        c.fillStyle = o.f || "rgba(14,26,43,.74)";
+        c.fill();
+        c.lineWidth = o.lw || 1.5;
+        c.strokeStyle = o.s || "rgba(34,211,238,.28)";
+        c.stroke();
+        c.restore();
+      }
+      const dots = (c, x, y) => {
+        ["#ff5f57", "#febc2e", "#28c840"].forEach((k, i) => {
+          c.beginPath();
+          c.arc(x + i * 20, y, 5, 0, 7);
+          c.fillStyle = k;
+          c.globalAlpha *= 1;
+          c.fill();
+        });
+      };
+      const lab = (c, s, x, y, a, col = CY) =>
+        tx(c, s, x, y, 22, { f: MONO, ls: 5, c: col, a, al: "left", w: 500 });
+      const glow = (c, x, y, r, col, a) => {
+        const g = c.createRadialGradient(x, y, 0, x, y, r);
+        g.addColorStop(0, col.replace("A", a));
+        g.addColorStop(1, col.replace("A", 0));
+        c.fillStyle = g;
+        c.fillRect(x - r, y - r, 2 * r, 2 * r);
+      };
+      const pill = (c, s, x, y, a, col = CY) => {
+        c.save();
+        c.font = `500 20px ${MONO}`;
+        const w = c.measureText(s).width + 34;
+        c.restore();
+        pn(c, x, y - 20, w, 40, { r: 20, s: col + "88", f: "rgba(14,26,43,.6)" });
+        tx(c, s, x + w / 2, y, 20, { f: MONO, w: 500, c: "#dff6ff" });
+        return w + 14;
+      };
+      function bg(c, t) {
+        const p = pulse(t);
+        let g = c.createLinearGradient(0, 0, 0, H);
+        g.addColorStop(0, "#04070e");
+        g.addColorStop(1, "#0b1526");
+        c.fillStyle = g;
+        c.fillRect(0, 0, W, H);
+        const k = cl(t / 6) * 0.8 + 0.2;
+        glow(c, 1500 + Math.sin(t * 0.2) * 120, 200, 900, "rgba(34,211,238,A)", 0.12 * k + 0.08 * p);
+        glow(c, 300 + Math.cos(t * 0.17) * 120, 900, 1000, "rgba(139,92,246,A)", 0.14 * k + 0.07 * p);
+        c.strokeStyle = "rgba(120,200,255,.04)";
+        c.lineWidth = 1;
+        const ox = (t * 12) % 80;
+        c.beginPath();
+        for (let x = -ox; x < W; x += 80) {
+          c.moveTo(x, 0);
+          c.lineTo(x, H);
+        }
+        for (let y = 0; y < H; y += 80) {
+          c.moveTo(0, y);
+          c.lineTo(W, y);
+        }
+        c.stroke();
+        for (let i = 0; i < 90; i++) {
+          const z = 0.3 + R(i) * 0.9,
+            x = (((R(i + 200) * W - t * 9 * z + Math.sin(t * 0.3 + i) * 20) % W) + W) % W,
+            y = (((R(i + 300) * H - t * 20 * z) % H) + H) % H,
+            a = (0.12 + 0.45 * R(i + 400)) * (0.6 + 0.4 * Math.sin(t * 1.3 + i));
+          c.fillStyle = i % 3 ? `rgba(190,235,255,${a})` : `rgba(167,139,250,${a})`;
+          c.beginPath();
+          c.arc(x, y, 0.8 + z * 2, 0, 7);
+          c.fill();
+        }
+      }
+
+      // ---- scenes ----
+      function s1(c, t) {
+        c.globalAlpha = 1 - sg(t, 7.2, 8);
+        const l = eo(sg(t, 1.4, 3.6));
+        let g = c.createLinearGradient(200, 0, 1720, 0);
+        g.addColorStop(0, "rgba(34,211,238,0)");
+        g.addColorStop(0.5, "rgba(225,250,255,1)");
+        g.addColorStop(1, "rgba(139,92,246,0)");
+        c.save();
+        c.globalAlpha *= l * (1 - 0.8 * sg(t, 3.6, 4.8));
+        c.fillStyle = g;
+        c.fillRect(960 - 760 * l, 538, 1520 * l, 2.5);
+        c.restore();
+        const f = t >= 3.6 ? Math.exp(-(t - 3.6) * 5) : 0;
+        if (f > 0.01) glow(c, 960, 540, 800, "rgba(200,245,255,A)", 0.5 * f);
+        rev(c, "R. SIRADDEEN", 960, 470, 150, 3.6, t, { st: 0.045, ls: 22, sh: CY, sb: 40 });
+        tx(c, "SOLO FOUNDER  ·  FULL-STACK DEVELOPER", 960, 590, 28, {
+          a: eo(sg(t, 4.4, 5.2)),
+          ls: 10,
+          c: "#9fe9f7",
+          w: 500,
+        });
+        ["BUILD.", "SHIP.", "SOLVE."].forEach((s, i) => {
+          const t0 = 5.4 + i * 0.6,
+            p = bk(sg(t, t0, t0 + 0.5));
+          if (p > 0)
+            tx(c, s, 960 + (i - 1) * 340, 770 + (1 - cl(p, 0, 1)) * 24, 72, {
+              a: cl(p * 2),
+              ls: 6,
+              c: i == 2 ? "#c4b5fd" : "#fff",
+              sh: i == 2 ? VI : CY,
+              sb: 24,
+            });
+        });
+      }
+
+      const CODE = [
+        "export async function POST(req) {",
+        "  const key = await authenticate(req)",
+        "  const deal = await createDeal(key.workspace)",
+        "  return Response.json(deal, { status: 201 })",
+        "}",
+      ];
+
+      function s2(c, t, a, b) {
+        c.globalAlpha = vis(t, a, b, 0.6, 0.8);
+        lab(c, "01 — THE DEVELOPER", 140, 200, eo(sg(t, 8.2, 9)));
+        const m = (s, y, t0, col) => {
+          const p = eo(sg(t, t0, t0 + 0.9));
+          c.save();
+          c.beginPath();
+          c.rect(100, y - 60, 1060, 120);
+          c.clip();
+          tx(c, s, 140, y + (1 - p) * 90, 78, { al: "left", a: p, c: col || "#f2fbff", ls: 1 });
+          c.restore();
+        };
+        m("ONE DEVELOPER.", 320, 8.6);
+        const g = c.createLinearGradient(140, 0, 1100, 0);
+        g.addColorStop(0, CY);
+        g.addColorStop(1, "#a78bfa");
+        m("THE WHOLE PRODUCT.", 440, 10.4, g);
+        tx(c, "Interface. API. Database. Deployment.", 140, 560, 34, {
+          al: "left",
+          a: eo(sg(t, 12.4, 13.4)),
+          c: DIM,
+          w: 400,
+        });
+        tx(c, "Built end to end — solo, from Tirupati, India.", 140, 612, 34, {
+          al: "left",
+          a: eo(sg(t, 13.2, 14.2)),
+          c: DIM,
+          w: 400,
+        });
+        const fl = (i, t0, fn) => {
+          const p = eo(sg(t, t0, t0 + 0.8));
+          if (p <= 0) return;
+          c.save();
+          c.globalAlpha *= p;
+          c.translate(0, (1 - p) * 40 + Math.sin(t * 0.9 + i * 2) * 7);
+          fn();
+          c.restore();
+        };
+        fl(0, 9, () => {
+          pn(c, 1150, 190, 660, 290);
+          dots(c, 1176, 216);
+          let r = Math.floor(Math.max(0, t - 9.8) * 30);
+          CODE.forEach((ln, i) => {
+            tx(c, ln.slice(0, Math.max(0, r)), 1180, 272 + i * 42, 21, {
+              al: "left",
+              f: MONO,
+              w: 400,
+              c: i == 3 ? "#a7f3d0" : "#cfe8f5",
+            });
+            r -= ln.length;
+          });
+        });
+        fl(1, 10, () => {
+          pn(c, 1150, 530, 350, 260);
+          dots(c, 1176, 556);
+          tx(c, "dashboard", 1480, 556, 16, { f: MONO, w: 400, c: "#5f7f96", al: "right" });
+          const gr = eo(sg(t, 11, 13));
+          [0.5, 0.8, 0.6, 0.95, 0.7, 0.85].forEach((v, i) => {
+            const h = 170 * v * gr;
+            c.fillStyle = i % 2 ? CY : VI;
+            c.globalAlpha *= 1;
+            c.fillRect(1186 + i * 52, 760 - h, 34, h);
+          });
+        });
+        fl(2, 11, () => {
+          pn(c, 1530, 530, 280, 260);
+          tx(c, "table: deals", 1556, 562, 18, { al: "left", f: MONO, c: CY, w: 500 });
+          ["id  stage", "01  new", "02  contacted", "03  proposal", "04  won"].forEach((s, i) =>
+            tx(c, s, 1556, 612 + i * 34, 17, {
+              al: "left",
+              f: MONO,
+              w: 400,
+              c: i ? "#cfe8f5" : "#5f7f96",
+            }),
+          );
+        });
+        const pr = eo(sg(t, 14.6, 19));
+        c.fillStyle = "rgba(255,255,255,.12)";
+        c.fillRect(140, 826, 780, 3);
+        c.fillStyle = CY;
+        c.fillRect(140, 826, 780 * pr, 3);
+        ["DESIGN", "BUILD", "TEST", "SHIP"].forEach((s, i) => {
+          const x = 140 + i * 260,
+            t0 = 15 + i * 1.3,
+            p = bk(sg(t, t0, t0 + 0.5));
+          c.beginPath();
+          c.arc(x, 828, 13 * cl(p, 0, 1.2), 0, 7);
+          c.fillStyle = t >= t0 ? CY : "#14314a";
+          c.fill();
+          tx(c, s, x, 872, 22, { f: MONO, ls: 4, a: cl(p), c: "#dff6ff", al: "left", w: 500 });
+        });
+        tx(c, "tests + verification on a live database before each release", 140, 940, 22, {
+          al: "left",
+          f: MONO,
+          w: 400,
+          c: "#7fa3bd",
+          a: eo(sg(t, 18.2, 19)),
+        });
+      }
+
+      const L3 = [
+        ['$ define --problem "leads, deals, invoices"', "✓ scope defined"],
+        ["$ npm run dev", "✓ interface ready on localhost:3000"],
+        ["POST /api/v1/deals", '← 201 Created  { scope: "write" }'],
+        [
+          "alter table deals enable row level security;",
+          "✓ workspace isolation enforced in the database",
+        ],
+        ["$ git push origin main", "✓ build passed → deployed"],
+      ];
+      const N3 = [
+        ["IDEA", "the problem"],
+        ["INTERFACE", "React · Next.js"],
+        ["API", "REST · scoped keys"],
+        ["DATABASE", "PostgreSQL · RLS"],
+        ["DEPLOYMENT", "CI/CD · Docker"],
+      ];
+
+      function ico(c, i, x, y, col) {
+        c.save();
+        c.strokeStyle = col;
+        c.fillStyle = col;
+        c.lineWidth = 3;
+        c.lineCap = "round";
+        if (i == 0) {
+          c.beginPath();
+          c.arc(x, y - 4, 15, 0, 7);
+          c.stroke();
+          for (let k = 0; k < 5; k++) {
+            const a = -Math.PI / 2 + (k - 2) * 0.7;
+            c.beginPath();
+            c.moveTo(x + Math.cos(a) * 22, y - 4 + Math.sin(a) * 22);
+            c.lineTo(x + Math.cos(a) * 30, y - 4 + Math.sin(a) * 30);
+            c.stroke();
+          }
+          c.fillRect(x - 7, y + 16, 14, 4);
+        }
+        if (i == 1) {
+          c.strokeRect(x - 30, y - 22, 60, 44);
+          c.beginPath();
+          c.moveTo(x - 30, y - 10);
+          c.lineTo(x + 30, y - 10);
+          c.stroke();
+          c.fillRect(x - 22, y, 22, 14);
+          c.fillRect(x + 6, y, 16, 14);
+        }
+        if (i == 2) tx(c, "{ }", x, y, 44, { f: MONO, c: col });
+        if (i == 3) {
+          for (let k = 0; k < 3; k++) {
+            c.beginPath();
+            c.ellipse(x, y - 16 + k * 16, 26, 8, 0, 0, 7);
+            c.stroke();
+          }
+          c.beginPath();
+          c.moveTo(x - 26, y - 16);
+          c.lineTo(x - 26, y + 16);
+          c.moveTo(x + 26, y - 16);
+          c.lineTo(x + 26, y + 16);
+          c.stroke();
+        }
+        if (i == 4) {
+          c.beginPath();
+          c.moveTo(x, y - 26);
+          c.lineTo(x + 16, y + 4);
+          c.lineTo(x, y - 2);
+          c.lineTo(x - 16, y + 4);
+          c.closePath();
+          c.stroke();
+          c.fillRect(x - 3, y + 8, 6, 12);
+        }
+        c.restore();
+      }
+
+      function s3(c, t, a, b) {
+        c.globalAlpha = vis(t, a, b, 0.7, 0.7);
+        lab(c, "02 — THE PROCESS", 140, 90, eo(sg(t, 20.4, 21)));
+        tx(c, "FROM IDEA TO WORKING SOFTWARE", 960, 160, 54, { ls: 6, a: eo(sg(t, 20.3, 21.2)) });
+        N3.forEach(([n, s], i) => {
+          const t0 = S3[i],
+            on = t >= t0,
+            x = 210 + i * 375;
+          if (i < 4) {
+            const q = eo(sg(t, S3[i + 1] - 0.9, S3[i + 1]));
+            c.save();
+            c.strokeStyle = "rgba(34,211,238,.6)";
+            c.lineWidth = 2;
+            c.setLineDash([8, 8]);
+            c.lineDashOffset = -t * 30;
+            c.beginPath();
+            c.moveTo(x + 130, 365);
+            c.lineTo(x + 130 + 125 * q, 365);
+            c.stroke();
+            c.restore();
+            if (q >= 1) {
+              c.fillStyle = "#fff";
+              c.beginPath();
+              c.arc(x + 130 + 125 * (((t * 0.8 + i * 0.3) % 1)), 365, 5, 0, 7);
+              c.fill();
+            }
+          }
+          c.save();
+          c.globalAlpha *= on ? 1 : 0.28;
+          if (on && t - t0 < 1) glow(c, x, 365, 220, "rgba(34,211,238,A)", 0.3 * (1 - (t - t0)));
+          pn(c, x - 130, 270, 260, 190, { s: on ? "rgba(34,211,238,.75)" : undefined, lw: on ? 2 : 1.5 });
+          ico(c, i, x, 328, on ? CY : "#4b6a82");
+          tx(c, n, x, 402, 26, { ls: 3, c: on ? "#fff" : "#6b8499" });
+          tx(c, s, x, 436, 17, { f: MONO, w: 400, c: "#7fa3bd" });
+          c.restore();
+        });
+        c.save();
+        c.globalAlpha *= eo(sg(t, 20.8, 21.6));
+        pn(c, 240, 560, 1440, 410, { r: 16, f: "rgba(5,10,18,.88)" });
+        dots(c, 268, 586);
+        tx(c, "siraddeen@build  ~/project", 960, 586, 16, { f: MONO, w: 400, c: "#5f7f96" });
+        let y = 640;
+        L3.forEach((ls, i) => {
+          let tt = S3[i] + 0.3;
+          ls.forEach((s, j) => {
+            const n = Math.floor(Math.max(0, t - tt) * 40);
+            if (n > 0)
+              tx(c, s.slice(0, n), 280, y, 25, {
+                al: "left",
+                f: MONO,
+                w: 400,
+                c: j ? "#5eead4" : "#e6f4ff",
+              });
+            y += 32;
+            tt += s.length / 40 + 0.25;
+          });
+        });
+        c.restore();
+      }
+
+      const CLU = [
+        ["FRONTEND", 420, 200, ["React", "Next.js", "TypeScript"]],
+        ["BACKEND", 1500, 200, ["Node.js", "Express", "REST APIs"]],
+        ["DATA", 420, 640, ["PostgreSQL", "Supabase", "MongoDB"]],
+        ["SHIP & PAYMENTS", 1500, 640, ["Docker", "GitHub Actions", "Stripe", "Razorpay"]],
+      ];
+
+      function s4(c, t, a, b) {
+        c.globalAlpha = vis(t, a, b, 0.7, 0.8);
+        lab(c, "03 — THE STACK", 140, 90, eo(sg(t, 35.4, 36)));
+        const cp = eo(sg(t, 35.4, 36.4));
+        c.save();
+        c.translate(960, 500);
+        c.globalAlpha *= cp;
+        for (let r = 0; r < 3; r++) {
+          c.beginPath();
+          c.strokeStyle = `rgba(34,211,238,${0.55 - r * 0.14})`;
+          c.lineWidth = 2;
+          c.setLineDash([r ? 6 : 2, r ? 14 : 10]);
+          c.lineDashOffset = t * (r % 2 ? -20 : 25);
+          c.arc(0, 0, 90 + r * 50, 0, 7);
+          c.stroke();
+        }
+        c.restore();
+        tx(c, "FULL-STACK", 960, 490, 34, { ls: 5, a: cp });
+        tx(c, "end to end", 960, 530, 20, { f: MONO, w: 400, a: cp, c: "#7fa3bd" });
+        CLU.forEach(([n, x, y, ch], i) => {
+          const t0 = CL[i],
+            q = eo(sg(t, t0, t0 + 0.7)),
+            d = x < 960 ? -1 : 1;
+          c.save();
+          c.strokeStyle = "rgba(139,92,246,.6)";
+          c.lineWidth = 2;
+          c.setLineDash([6, 8]);
+          c.lineDashOffset = -t * 24;
+          c.beginPath();
+          c.moveTo(960 + d * 150, 500);
+          c.lineTo(lp(960 + d * 150, x - d * 130, q), lp(500, y + 10, q));
+          c.stroke();
+          c.restore();
+          tx(c, n, x, y, 26, { ls: 6, c: CY, a: q, f: MONO, w: 500 });
+          ch.forEach((s, j) => {
+            const ti = t0 + 0.5 + j * 0.35,
+              p = eo(sg(t, ti, ti + 0.6));
+            if (p <= 0) return;
+            c.save();
+            c.font = `600 28px ${SANS}`;
+            const w = c.measureText(s).width + 56,
+              yy = y + 66 + j * 72 + Math.sin(t * 0.8 + i + j) * 5,
+              xx = x - d * (1 - p) * 260,
+              f = cl(1 - (t - ti - 0.5) / 0.5) * (t > ti + 0.5 ? 1 : 0);
+            c.restore();
+            if (f > 0) glow(c, xx, yy, 110, "rgba(34,211,238,A)", 0.35 * f);
+            pn(c, xx - w / 2, yy - 30, w, 60, { r: 30, s: `rgba(34,211,238,${0.3 + 0.6 * f})` });
+            tx(c, s, xx, yy, 28, { w: 600, a: p });
+          });
+        });
+      }
+
+      // ---- scene 5 ----
+      const bul = (c, s, x, y, a) => {
+        c.save();
+        c.globalAlpha *= a;
+        c.fillStyle = CY;
+        c.beginPath();
+        c.arc(x, y, 5, 0, 7);
+        c.fill();
+        c.restore();
+        tx(c, s, x + 22, y, 27, { al: "left", w: 500, a, c: "#eaf6ff" });
+      };
+      function head(c, a, tag, n) {
+        tx(c, tag, 140, 190, 22, { f: MONO, ls: 4, c: CY, al: "left", w: 500, a: eo(sg(a, 0.1, 0.7)) });
+        lab(c, "04 — SELECTED WORK", 140, 90, 1);
+        tx(c, n + " / 03", 1780, 90, 22, { f: MONO, ls: 4, c: "#7fa3bd", al: "right" });
+      }
+
+      function crm(c, t, a, b) {
+        c.globalAlpha = vis(t, a, b, 0.6, 0.5);
+        const u = t - a;
+        head(c, u, "PROJECT 01 · IN ACTIVE DEVELOPMENT", "01");
+        tx(c, "FREELANCE", 140, 290, 84, { al: "left", a: eo(sg(u, 0.3, 1)) });
+        tx(c, "AGENCY CRM", 140, 385, 84, { al: "left", a: eo(sg(u, 0.5, 1.2)), c: CY });
+        tx(c, "THE PROBLEM", 140, 500, 20, {
+          f: MONO,
+          ls: 4,
+          c: "#a78bfa",
+          al: "left",
+          a: eo(sg(u, 1.8, 2.4)),
+        });
+        [
+          "Generic CRMs are built for enterprise teams.",
+          "Spreadsheets have no deal stages, automation",
+          "or payment links.",
+        ].forEach((s, i) =>
+          tx(c, s, 140, 548 + i * 40, 29, {
+            al: "left",
+            w: 400,
+            c: DIM,
+            a: eo(sg(u, 2 + i * 0.35, 2.8 + i * 0.35)),
+          }),
+        );
+        tx(c, "WHAT IT DOES", 140, 690, 20, {
+          f: MONO,
+          ls: 4,
+          c: "#a78bfa",
+          al: "left",
+          a: eo(sg(u, 3.6, 4.2)),
+        });
+        [
+          "5-stage deal pipeline",
+          "Itemized invoices · Stripe & Razorpay pay links",
+          "Workspace isolation at the database level",
+          "Background automations with retries · scoped API",
+        ].forEach((s, i) => bul(c, s, 150, 740 + i * 48, eo(sg(u, 4 + i * 0.9, 4.7 + i * 0.9))));
+        const kp = eo(sg(u, 0.6, 1.6));
+        c.save();
+        c.globalAlpha *= kp;
+        pn(c, 960, 210, 820, 560, { r: 20 });
+        dots(c, 990, 238);
+        tx(c, "Deals", 1760, 238, 18, { f: MONO, w: 400, c: "#5f7f96", al: "right" });
+        const col = ["New", "Contacted", "Proposal Sent", "Won", "Lost"],
+          cx = (i) => 972 + i * 162;
+        col.forEach((n, i) => {
+          pn(c, cx(i), 290, 148, 460, {
+            r: 10,
+            f:
+              i == 3
+                ? `rgba(16,185,129,${
+                    0.12 + 0.1 * Math.max(0, Math.sin((t - KAN[2] - 0.6) * 3) * (t > KAN[2] + 0.6 ? 1 : 0))
+                  })`
+                : "rgba(255,255,255,.03)",
+            s: "rgba(255,255,255,.08)",
+          });
+          tx(c, n, cx(i) + 74, 268, i == 2 ? 14 : 16, {
+            f: MONO,
+            w: 500,
+            c: i == 3 ? "#6ee7b7" : "#9fb4c8",
+          });
+        });
+        const card = (x, y, k, al = 1) => {
+          c.save();
+          c.globalAlpha *= al;
+          pn(c, x + 8, y, 132, 78, { r: 8, f: "rgba(20,40,64,.9)", s: "rgba(34,211,238,.25)" });
+          c.fillStyle = k || VI;
+          c.fillRect(x + 8, y + 10, 3, 58);
+          c.fillStyle = "rgba(220,240,255,.55)";
+          c.fillRect(x + 22, y + 18, 86, 8);
+          c.fillStyle = "rgba(220,240,255,.25)";
+          c.fillRect(x + 22, y + 40, 54, 7);
+          c.restore();
+        };
+        card(cx(0), 490, VI);
+        card(cx(0), 580, CY);
+        card(cx(1), 390, VI);
+        card(cx(2), 390, CY);
+        card(cx(4), 300, "#64748b", 0.6);
+        let k = 0;
+        KAN.slice(0, 3).forEach((tt, i) => {
+          if (t >= tt) k = i + 1;
+        });
+        const p = k ? eo(sg(t, KAN[k - 1], KAN[k - 1] + 0.8)) : 0,
+          from = k ? k - 1 : 0,
+          hx = lp(cx(from), cx(k), p),
+          hy = k == 0 ? 300 : lp(300 + (from == 0 ? 0 : 0), 300, p);
+        if (k == 0) card(cx(0), 300, "#f59e0b");
+        else card(hx, 300 + (k < 3 ? 0 : 0), k == 3 ? "#10b981" : "#f59e0b");
+        c.restore();
+        const ip = bk(sg(u, KAN[3] - a, KAN[3] - a + 0.7));
+        if (ip > 0) {
+          c.save();
+          c.translate(0, (1 - cl(ip, 0, 1)) * 80);
+          c.globalAlpha *= cl(ip);
+          pn(c, 1400, 520, 360, 230, {
+            r: 16,
+            f: "rgba(10,22,38,.97)",
+            s: "rgba(16,185,129,.6)",
+            lw: 2,
+          });
+          tx(c, "INVOICE", 1424, 550, 18, { f: MONO, ls: 4, al: "left", c: CY });
+          [0, 1, 2].forEach((i) => {
+            c.fillStyle = "rgba(220,240,255,.3)";
+            c.fillRect(1424, 578 + i * 24, 200 - i * 30, 8);
+            c.fillRect(1700, 578 + i * 24, 36, 8);
+          });
+          c.fillStyle = "rgba(255,255,255,.12)";
+          c.fillRect(1424, 654, 312, 2);
+          const paid = t > KAN[3] + 1.6;
+          pn(c, 1424, 676, 150, 44, {
+            r: 22,
+            f: paid ? "#10b981" : "rgba(34,211,238,.18)",
+            s: paid ? "#10b981" : CY,
+          });
+          tx(c, paid ? "PAID ✓" : "Pay online", 1499, 698, 19, {
+            w: 600,
+            c: paid ? "#04120c" : "#dff6ff",
+          });
+          tx(c, "Stripe · Razorpay", 1590, 698, 16, {
+            al: "left",
+            f: MONO,
+            w: 400,
+            c: "#7fa3bd",
+          });
+          c.restore();
+        }
+      }
+
+      function aria(c, t, a, b) {
+        c.globalAlpha = vis(t, a, b, 0.5, 0.5);
+        const u = t - a;
+        head(c, u, "PROJECT 02 · OFFLINE-FIRST PWA", "02");
+        tx(c, "ARIA", 140, 310, 130, { al: "left", a: eo(sg(u, 0.3, 1)), c: CY, ls: 6 });
+        tx(c, "Adaptive Resilience Intelligence Assistant", 140, 400, 30, {
+          al: "left",
+          w: 500,
+          c: "#c4b5fd",
+          a: eo(sg(u, 0.6, 1.2)),
+        });
+        tx(c, "THE PROBLEM", 140, 500, 20, {
+          f: MONO,
+          ls: 4,
+          c: "#a78bfa",
+          al: "left",
+          a: eo(sg(u, 1, 1.6)),
+        });
+        ["Emergency guidance has to work", "even when the network doesn’t."].forEach((s, i) =>
+          tx(c, s, 140, 548 + i * 44, 34, {
+            al: "left",
+            w: 400,
+            c: DIM,
+            a: eo(sg(u, 1.2 + i * 0.4, 2 + i * 0.4)),
+          }),
+        );
+        let x = 140;
+        c.save();
+        c.globalAlpha *= eo(sg(u, 2.6, 3.2));
+        ["React PWA", "offline-first", "GPS SOS"].forEach((s) => {
+          x += pill(c, s, x, 700, 1);
+        });
+        pill(c, "aria.siraddeen.in", 140, 760, 1, VI);
+        c.restore();
+        const Ls = [
+          ["CLOUD MODEL", "online · highest quality", CY],
+          ["ON-DEVICE MODEL", "offline · runs on the phone", VI],
+          ["KNOWLEDGE ENGINE", "57 emergency scenarios · always available", "#10b981"],
+        ];
+        Ls.forEach(([n, s, k], i) => {
+          const t0 = a + 0.5 + i * 0.4,
+            p = eo(sg(t, t0, t0 + 0.5)),
+            y = 240 + i * 170,
+            dead = (i == 0 && t > ARI[1]) || (i == 1 && t > ARI[3]),
+            hit =
+              (i == 0 && t > ARI[0] + 0.6 && t < ARI[1]) ||
+              (i == 1 && t > ARI[2] + 0.7 && t < ARI[3]) ||
+              (i == 2 && t > ARI[4] + 0.6);
+          c.save();
+          c.globalAlpha *= p * (dead ? 0.35 : 1);
+          if (hit)
+            glow(
+              c,
+              1390,
+              y + 55,
+              420,
+              k == CY ? "rgba(34,211,238,A)" : k == VI ? "rgba(139,92,246,A)" : "rgba(16,185,129,A)",
+              0.3,
+            );
+          pn(c, 1000, y, 780, 110, { s: k + (hit ? "ff" : "66"), lw: hit ? 3 : 1.5 });
+          tx(c, n, 1030, y + 36, 28, { al: "left", ls: 3, c: "#fff" });
+          tx(c, s, 1030, y + 76, 20, { al: "left", f: MONO, w: 400, c: "#8fb0c8" });
+          if (dead) tx(c, i ? "UNAVAILABLE" : "NO NETWORK", 1750, y + 55, 20, { al: "right", f: MONO, c: "#f87171", w: 600 });
+          if (i == 2 && hit) tx(c, "ANSWERS ✓", 1750, y + 55, 20, { al: "right", f: MONO, c: "#6ee7b7", w: 600 });
+          c.restore();
+        });
+        [[ARI[0], 0], [ARI[2], 1], [ARI[4], 2]].forEach(([t0, i]) => {
+          const q = sg(t, t0, t0 + 0.7);
+          if (q > 0 && q < 1) {
+            const y = lp(i == 0 ? 170 : 240 + (i - 1) * 170 + 110, 240 + i * 170 + 20, q);
+            c.fillStyle = "#fff";
+            c.beginPath();
+            c.arc(1390, y, 9, 0, 7);
+            c.fill();
+            glow(c, 1390, y, 40, "rgba(255,255,255,A)", 0.4);
+          }
+        });
+        tx(c, "user question", 1390, 176, 18, { f: MONO, w: 400, c: "#7fa3bd", a: eo(sg(u, 1.5, 2)) });
+      }
+
+      function jobs(c, t, a, b) {
+        c.globalAlpha = vis(t, a, b, 0.5, 0.5);
+        const u = t - a;
+        head(c, u, "PROJECT 03 · DATA PIPELINE", "03");
+        tx(c, "REMOTE JOBS", 140, 290, 84, { al: "left", a: eo(sg(u, 0.3, 1)) });
+        tx(c, "ANALYTICS", 140, 385, 84, { al: "left", a: eo(sg(u, 0.5, 1.2)), c: CY });
+        ["Raw listings in.", "Clear market insight out."].forEach((s, i) =>
+          tx(c, s, 140, 520 + i * 50, 36, {
+            al: "left",
+            w: 400,
+            c: i ? "#eaf6ff" : DIM,
+            a: eo(sg(u, 1.2 + i * 0.5, 2 + i * 0.5)),
+          }),
+        );
+        let x = 140;
+        c.save();
+        c.globalAlpha *= eo(sg(u, 2.6, 3.2));
+        ["Python ETL", "PostgreSQL", "Flask API", "React"].forEach((s, i) => {
+          if (i == 2) {
+            x = 140;
+          }
+          x += pill(c, s, x, i < 2 ? 700 : 760, 1);
+        });
+        c.restore();
+        tx(c, "jobs.siraddeen.in", 140, 840, 28, {
+          al: "left",
+          f: MONO,
+          c: CY,
+          a: eo(sg(u, 3.4, 4)),
+          w: 500,
+        });
+        ["ETL", "POSTGRES", "API", "DASHBOARD"].forEach((n, i) => {
+          const t0 = JOB[i],
+            on = t >= t0,
+            x = 970 + i * 216;
+          c.save();
+          c.globalAlpha *= on ? 1 : 0.25;
+          pn(c, x, 250, 170, 100, { s: on ? CY : undefined, lw: on ? 2 : 1.5 });
+          tx(c, n, x + 85, 300, 20, { f: MONO, ls: 2, w: 600 });
+          c.restore();
+          if (i < 3 && t > JOB[i + 1]) {
+            c.strokeStyle = CY;
+            c.lineWidth = 2;
+            c.setLineDash([6, 6]);
+            c.lineDashOffset = -t * 30;
+            c.beginPath();
+            c.moveTo(x + 170, 300);
+            c.lineTo(x + 216, 300);
+            c.stroke();
+            c.setLineDash([]);
+          }
+        });
+        const q = eo(sg(t, 69.4, 71.2));
+        c.save();
+        c.globalAlpha *= eo(sg(t, 69, 69.6));
+        pn(c, 970, 420, 810, 340);
+        tx(c, "dashboard", 1000, 448, 16, { al: "left", f: MONO, w: 400, c: "#5f7f96" });
+        for (let i = 0; i < 14; i++) {
+          const h = (60 + R(i + 40) * 180) * cl(q * 1.6 - i * 0.04);
+          c.fillStyle = i % 2 ? "rgba(34,211,238,.8)" : "rgba(139,92,246,.8)";
+          c.fillRect(1000 + i * 36, 730 - h, 24, h);
+        }
+        c.beginPath();
+        c.strokeStyle = "#fff";
+        c.lineWidth = 3;
+        for (let i = 0; i <= 13; i++) {
+          const y = 640 - i * 8 - R(i + 90) * 50;
+          i ? c.lineTo(1012 + i * 36, lp(730, y, q)) : c.moveTo(1012, lp(730, y, q));
+        }
+        c.stroke();
+        c.restore();
+      }
+
+      function s5(c, t) {
+        if (t < 59.7) crm(c, t, 48, 59.7);
+        else if (t < 66) aria(c, t, 59.7, 66);
+        else jobs(c, t, 66, 72);
+      }
+
+      function s6(c, t, a, b) {
+        c.globalAlpha = vis(t, a, b, 0.6, 0.7);
+        lab(c, "05 — THE APPROACH", 140, 90, eo(sg(t, 72.2, 72.9)));
+        [
+          "UNDERSTAND THE PROBLEM.",
+          "BUILD THE SYSTEM.",
+          "SHIP WITH PURPOSE.",
+          "IMPROVE THROUGH FEEDBACK.",
+        ].forEach((s, i) => {
+          const p = eo(sg(t, ST6[i], ST6[i] + 0.8)),
+            nx = i < 3 ? sg(t, ST6[i + 1], ST6[i + 1] + 0.6) : 0;
+          if (p > 0) {
+            tx(c, "0" + (i + 1), 140, 300 + i * 130, 20, {
+              f: MONO,
+              c: CY,
+              al: "left",
+              a: p * (1 - 0.7 * nx),
+              ls: 4,
+            });
+            tx(c, s, 140 + (1 - p) * 40, 345 + i * 130 - 18, 56, {
+              al: "left",
+              a: p * (1 - 0.72 * nx),
+              sh: nx < 0.5 ? CY : null,
+              sb: 18,
+            });
+          }
+        });
+        const sc = eio(sg(t, 75.8, 77.8)),
+          ed = eo(sg(t, 76.8, 78.2)),
+          wn = eo(sg(t, 77.6, 78.6)),
+          ui = eio(sg(t, 77.8, 79.4));
+        if (t < 77) glow(c, 1480, 520, 360, "rgba(34,211,238,A)", 0.08 + 0.04 * Math.sin(t * 3));
+        if (wn > 0) {
+          pn(c, 1180, 290, 600, 460, { a: wn, r: 18 });
+          c.save();
+          c.globalAlpha *= wn;
+          dots(c, 1206, 316);
+          c.fillStyle = "rgba(255,255,255,.06)";
+          c.fillRect(1180, 336, 120, 414);
+          c.restore();
+        }
+        const gx = (i) => 1330 + (i % 3) * 190,
+          gy = (i) => 430 + Math.floor(i / 3) * 130,
+          P = (i) => [
+            lp(1150 + R(i + 5) * 650 + Math.sin(t + i) * 22, gx(i), sc),
+            lp(250 + R(i + 15) * 540 + Math.cos(t * 0.9 + i) * 22, gy(i), sc),
+          ];
+        if (ed > 0) {
+          c.strokeStyle = `rgba(34,211,238,${0.5 * ed * (1 - ui)})`;
+          c.lineWidth = 2;
+          [
+            [0, 1],
+            [1, 2],
+            [3, 4],
+            [4, 5],
+            [6, 7],
+            [7, 8],
+            [0, 3],
+            [3, 6],
+            [1, 4],
+            [4, 7],
+            [2, 5],
+            [5, 8],
+          ].forEach(([i, j]) => {
+            const A = P(i),
+              B = P(j);
+            c.beginPath();
+            c.moveTo(A[0], A[1]);
+            c.lineTo(B[0], B[1]);
+            c.stroke();
+          });
+        }
+        for (let i = 0; i < 9; i++) {
+          const [x, y] = P(i),
+            w = lp(20, 160, ui),
+            h = lp(20, 92, ui);
+          pn(c, x - w / 2, y - h / 2, w, h, {
+            r: lp(10, 10, ui),
+            f: ui > 0.05 ? "rgba(20,44,70,.92)" : "rgba(34,211,238,.9)",
+            s: ui > 0.05 ? "rgba(34,211,238,.4)" : "rgba(34,211,238,.9)",
+          });
+          if (ui > 0.5) {
+            c.fillStyle = `rgba(220,240,255,${0.5 * ui})`;
+            c.fillRect(x - 60, y - 22, 90, 8);
+            c.fillStyle = `rgba(167,139,250,${0.6 * ui})`;
+            c.fillRect(x - 60, y + 4, 50 + (i % 3) * 18, 6);
+          }
+        }
+        ["tests ✓", "build ✓", "deployed ✓"].forEach((s, i) => {
+          const t0 = 79.2 + i * 0.7,
+            p = bk(sg(t, t0, t0 + 0.4));
+          if (p > 0) tx(c, s, 1270 + i * 200, 806, 24, { f: MONO, w: 600, c: "#6ee7b7", a: cl(p) });
+        });
+        const sp = bk(sg(t, 81, 81.5));
+        if (sp > 0) {
+          pn(c, 1360, 860, 240, 56, { r: 28, f: "rgba(16,185,129,.9)", s: "#6ee7b7" });
+          tx(c, "SHIPPED", 1480, 888, 26, { c: "#04120c", ls: 5, a: cl(sp) });
+        }
+        if (t > 81.8) {
+          const q = eo(sg(t, 81.8, 84));
+          c.save();
+          c.strokeStyle = "rgba(167,139,250,.85)";
+          c.lineWidth = 3;
+          c.setLineDash([14, 10]);
+          c.lineDashOffset = -t * 40;
+          c.beginPath();
+          c.arc(1480, 520, 340, -Math.PI / 2 + t * 0.3, -Math.PI / 2 + t * 0.3 + Math.PI * 1.6 * q);
+          c.stroke();
+          c.restore();
+          tx(c, "FEEDBACK LOOP", 1480, 160, 22, { f: MONO, ls: 6, c: "#c4b5fd", a: q });
+        }
+      }
+
+      const SVC = [
+        [
+          "WEBSITES & WEB APPS",
+          "</>",
+          ["Fast, responsive, modern.", "React & Next.js front to back."],
+        ],
+        [
+          "DASHBOARDS & INTERNAL TOOLS",
+          "[::]",
+          ["Multi-user workspaces,", "roles and admin views."],
+        ],
+        [
+          "APIs & INTEGRATIONS",
+          "{ }",
+          ["REST endpoints, webhooks,", "Stripe & Razorpay payments."],
+        ],
+        [
+          "DATABASE-BACKED WORKFLOWS",
+          "SQL",
+          ["PostgreSQL schemas, background", "jobs and automations."],
+        ],
+        ["MVPs & PROTOTYPES", "MVP", ["From a clear requirement", "to a working first version."]],
+      ];
+
+      function s7(c, t, a, b) {
+        c.globalAlpha = vis(t, a, b, 0.6, 0.7);
+        lab(c, "06 — FOR CLIENTS", 140, 90, eo(sg(t, 85.2, 85.8)));
+        tx(c, "WHAT I CAN BUILD FOR YOU", 960, 160, 54, { ls: 6, a: eo(sg(t, 85.2, 86)) });
+        SVC.forEach(([n, ic, d], i) => {
+          const p = bk(sg(t, SV[i], SV[i] + 0.7));
+          if (p <= 0) return;
+          const x = i < 3 ? 140 + i * 560 : 420 + (i - 3) * 560,
+            y = i < 3 ? 250 : 540;
+          c.save();
+          c.globalAlpha *= cl(p);
+          c.translate(0, (1 - cl(p, 0, 1.1)) * 60);
+          if (t - SV[i] < 0.9)
+            glow(c, x + 260, y + 110, 320, "rgba(34,211,238,A)", 0.25 * (1 - (t - SV[i]) / 0.9));
+          pn(c, x, y, 520, 230);
+          tx(c, ic, x + 484, y + 44, 30, { f: MONO, c: CY, al: "right", w: 600 });
+          tx(c, n, x + 30, y + 90, 24, { al: "left", ls: 1 });
+          d.forEach((s, j) =>
+            tx(c, s, x + 30, y + 140 + j * 34, 21, { al: "left", w: 400, c: DIM }),
+          );
+          c.restore();
+        });
+        const g = c.createLinearGradient(500, 0, 1420, 0);
+        g.addColorStop(0, CY);
+        g.addColorStop(1, "#a78bfa");
+        tx(c, "Concrete requirement in. Working software out.", 960, 900, 42, {
+          c: g,
+          a: eo(sg(t, 91.4, 92.4)),
+        });
+      }
+
+      function s8(c, t) {
+        c.globalAlpha = sg(t, 98.4, 98.9);
+        const f = t >= 98.4 ? Math.exp(-(t - 98.4) * 3) : 0;
+        glow(c, 960, 540, 1100, "rgba(34,211,238,A)", 0.1 + 0.55 * f + 0.04 * Math.sin(t * 1.5));
+        glow(c, 1200, 640, 800, "rgba(139,92,246,A)", 0.12 + 0.2 * f);
+        tx(c, "R. SIRADDEEN", 960, 300, 34, {
+          f: MONO,
+          ls: 18,
+          c: "#9fe9f7",
+          w: 500,
+          a: eo(sg(t, 98.8, 99.6)),
+        });
+        const g = c.createLinearGradient(200, 0, 1720, 0);
+        g.addColorStop(0, CY);
+        g.addColorStop(1, "#a78bfa");
+        rev(c, "LET’S BUILD", 960, 450, 124, 99, t, { st: 0.04, sh: CY, sb: 30, ls: 2 });
+        rev(c, "SOMETHING USEFUL.", 960, 590, 124, 99.6, t, { st: 0.035, c: g, ls: 2 });
+        const u = "https://siraddeen.in/",
+          n = Math.floor(Math.max(0, t - 101.6) * 22);
+        if (n > 0) {
+          tx(c, u.slice(0, n) + (n < u.length && t % 0.6 < 0.3 ? "▌" : ""), 960, 760, 56, {
+            f: MONO,
+            c: "#fff",
+            w: 500,
+            sh: CY,
+            sb: 22,
+          });
+          c.fillStyle = CY;
+          c.fillRect(960 - 340 * eo(sg(t, 101.6, 103)), 800, 680 * eo(sg(t, 101.6, 103)), 2);
+        }
+        tx(c, "Have a project in mind?   siraddeen15@gmail.com", 960, 860, 30, {
+          w: 400,
+          c: "#cfe8f5",
+          a: eo(sg(t, 102.8, 103.6)),
+        });
+        tx(c, "Also open: 3–5 pilot agencies for the Freelance Agency CRM", 960, 925, 22, {
+          f: MONO,
+          w: 400,
+          c: "#7fa3bd",
+          a: eo(sg(t, 103.8, 104.6)),
+        });
+      }
+
+      function draw(c, t) {
+        bg(c, t);
+        c.save();
+        const p = pulse(t);
+        c.translate(W / 2, H / 2);
+        const z = 1 + 0.012 * Math.sin(t * 0.13) + 0.004 * p;
+        c.scale(z, z);
+        c.translate(
+          -W / 2 + Math.sin(t * 0.23) * 10 + Math.sin(t * 70) * p * 2,
+          -H / 2 + Math.cos(t * 0.17) * 6,
+        );
+        [
+          [0, 8, s1],
+          [8, 20, s2],
+          [20, 35, s3],
+          [35, 48, s4],
+          [48, 72, s5],
+          [72, 85, s6],
+          [85, 98.6, s7],
+          [98.4, T + 1, s8],
+        ].forEach(([a, b, f]) => {
+          if (t >= a && t < b) {
+            c.save();
+            f(c, t, a, b);
+            c.restore();
+          }
+        });
+        c.restore();
+        const v = c.createRadialGradient(W / 2, H / 2, H * 0.45, W / 2, H / 2, H * 1.05);
+        v.addColorStop(0, "rgba(0,0,0,0)");
+        v.addColorStop(1, "rgba(0,0,0,.6)");
+        c.fillStyle = v;
+        c.fillRect(0, 0, W, H);
+        c.fillStyle = `rgba(0,0,0,${Math.max(1 - sg(t, 0, 1.5), sg(t, 106.6, T))})`;
+        c.fillRect(0, 0, W, H);
+      }
+
+      // ---- audio: every sound is synthesized (no samples, no voices) ----
+      function buildAudio(ctx, out) {
+        const sr = ctx.sampleRate,
+          E = [],
+          at = (t, f) => E.push([t, f]);
+        let B = 0,
+          ix = 0;
+        const nb = ctx.createBuffer(2, sr * 3, sr);
+        for (let c = 0; c < 2; c++) {
+          const d = nb.getChannelData(c);
+          for (let i = 0; i < d.length; i++) d[i] = R(i * 2 + c + 5) * 2 - 1;
+        }
+        const mix = ctx.createGain(),
+          cp = ctx.createDynamicsCompressor(),
+          lm = ctx.createDynamicsCompressor();
+        mix.gain.value = 0.9;
+        cp.threshold.value = -18;
+        cp.knee.value = 10;
+        cp.ratio.value = 3;
+        cp.attack.value = 0.008;
+        cp.release.value = 0.2;
+        lm.threshold.value = -2;
+        lm.knee.value = 0;
+        lm.ratio.value = 20;
+        lm.attack.value = 0.001;
+        lm.release.value = 0.08;
+        mix.connect(cp);
+        cp.connect(lm);
+        lm.connect(out);
+        const ir = ctx.createBuffer(2, sr * 3, sr);
+        for (let c = 0; c < 2; c++) {
+          const d = ir.getChannelData(c);
+          let y = 0;
+          for (let i = 0; i < d.length; i++) {
+            y += (R(i * 3 + c + 9) * 2 - 1 - y) * 0.3;
+            d[i] = y * (1 - i / d.length) ** 3.2;
+          }
+        }
+        const rv = ctx.createConvolver();
+        rv.buffer = ir;
+        const rin = ctx.createGain(),
+          rg = ctx.createGain();
+        rg.gain.value = 0.5;
+        rin.connect(rv);
+        rv.connect(rg);
+        rg.connect(mix);
+        const dl = ctx.createDelay(1),
+          din = ctx.createGain(),
+          fb = ctx.createGain(),
+          df = ctx.createBiquadFilter();
+        dl.delayTime.value = 0.45;
+        fb.gain.value = 0.36;
+        df.type = "lowpass";
+        df.frequency.value = 2600;
+        din.connect(dl);
+        dl.connect(df);
+        df.connect(fb);
+        fb.connect(dl);
+        df.connect(mix);
+        df.connect(rin);
+        const mf = (m) => 440 * 2 ** ((m - 69) / 12);
+        function tail(n, o, t, d) {
+          if (o.p0 != null || o.p != null) {
+            const p = ctx.createStereoPanner();
+            p.pan.setValueAtTime(o.p0 ?? o.p, t);
+            if (o.p1 != null) p.pan.linearRampToValueAtTime(o.p1, t + d);
+            n.connect(p);
+            n = p;
+          }
+          n.connect(mix);
+          if (o.rv) {
+            const s = ctx.createGain();
+            s.gain.value = o.rv;
+            n.connect(s);
+            s.connect(rin);
+          }
+          if (o.dl) {
+            const s = ctx.createGain();
+            s.gain.value = o.dl;
+            n.connect(s);
+            s.connect(din);
+          }
+        }
+        function env(g, t, d, o) {
+          const a = o.pa ? d * o.pa : o.a || 0.004,
+            pk = o.g || 0.1;
+          g.gain.setValueAtTime(0.0001, t);
+          g.gain.linearRampToValueAtTime(pk, t + a);
+          if (o.rel) g.gain.setValueAtTime(pk, t + Math.max(a, d - o.rel));
+          g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+        }
+        function V(ty, f, t, d, o = {}) {
+          t += B;
+          const s = ctx.createOscillator(),
+            g = ctx.createGain();
+          s.type = ty;
+          s.frequency.setValueAtTime(f, t);
+          if (o.f2) s.frequency.exponentialRampToValueAtTime(o.f2, t + d * (o.fs || 1));
+          if (o.det) s.detune.value = o.det;
+          let n = s;
+          if (o.lp) {
+            const fl = ctx.createBiquadFilter();
+            fl.type = "lowpass";
+            fl.Q.value = o.q || 0.7;
+            fl.frequency.setValueAtTime(o.lp, t);
+            if (o.lp2) fl.frequency.exponentialRampToValueAtTime(o.lp2, t + d);
+            n.connect(fl);
+            n = fl;
+          }
+          env(g, t, d, o);
+          n.connect(g);
+          tail(g, o, t, d);
+          s.start(t);
+          s.stop(t + d + 0.05);
+        }
+        function N(t, d, o = {}) {
+          t += B;
+          const s = ctx.createBufferSource(),
+            g = ctx.createGain(),
+            fl = ctx.createBiquadFilter();
+          s.buffer = nb;
+          s.loop = true;
+          fl.type = o.ty || "bandpass";
+          fl.Q.value = o.q || 1;
+          fl.frequency.setValueAtTime(o.f || 1000, t);
+          if (o.f2) fl.frequency.exponentialRampToValueAtTime(o.f2, t + d);
+          s.connect(fl);
+          env(g, t, d, o);
+          fl.connect(g);
+          tail(g, o, t, d);
+          s.start(t, (t * 7.3) % 2);
+          s.stop(t + d + 0.05);
+        }
+        const kick = (t, g = 0.5) => {
+          V("sine", 130, t, 0.34, { f2: 42, fs: 0.35, g, a: 0.002 });
+          N(t, 0.02, { ty: "highpass", f: 3500, q: 0.5, g: g * 0.25, a: 0.001 });
+        };
+        const imp = (t, s = 1) => {
+          V("sine", 70, t, 2.4, { f2: 26, fs: 0.8, g: 0.5 * s, a: 0.003, rv: 0.2 });
+          V("sine", 140, t, 0.8, { f2: 45, fs: 0.6, g: 0.28 * s, a: 0.003 });
+          N(t, 1.6, { ty: "lowpass", f: 900, f2: 60, q: 0.5, g: 0.3 * s, a: 0.002, rv: 0.6 });
+          N(t, 0.12, { ty: "highpass", f: 2500, g: 0.14 * s, a: 0.001, rv: 0.5 });
+        };
+        const rise = (t0, t1, g = 0.1) => {
+          const d = t1 - t0;
+          N(t0, d, { f: 300, f2: 7000, q: 2.5, g, pa: 0.97, p0: -0.5, p1: 0.5, rv: 0.4 });
+          V("sawtooth", 110, t0, d, { f2: 880, g: g * 0.4, pa: 0.98, lp: 600, lp2: 5000, rv: 0.3 });
+        };
+        const sweep = (t, d = 0.9, f0 = 400, f1 = 4500, g = 0.1, p0 = -0.8, p1 = 0.8) =>
+          N(t, d, { f: f0, f2: f1, q: 3, g, pa: 0.45, p0, p1, rv: 0.3 });
+        const tick = (t, f = 2600, g = 0.045, p = 0) =>
+          V("square", f, t, 0.04, { g, a: 0.001, lp: 6000, p });
+        const key = (t, g = 0.04) => {
+          N(t, 0.02, { f: 3200 + R(t * 100) * 1500, q: 2.5, g, a: 0.001, p: R(t * 50) * 0.6 - 0.3 });
+          V("sine", 150, t, 0.03, { g: g * 0.7, a: 0.001 });
+        };
+        const chime = (t, m, g = 0.06) => {
+          V("sine", mf(m), t, 1.6, { g, rv: 0.7, a: 0.003 });
+          V("sine", mf(m + 12), t, 1, { g: g * 0.4, rv: 0.6, a: 0.003 });
+          V("triangle", mf(m + 19), t, 0.5, { g: g * 0.2, a: 0.003 });
+        };
+        const hat = (t, g = 0.03) =>
+          N(t, 0.045, { ty: "highpass", f: 7500, q: 0.5, g, a: 0.001, p: R(t * 70) * 0.8 - 0.4 });
+        const snare = (t, g = 0.1) => {
+          N(t, 0.2, { f: 1900, q: 0.7, g, a: 0.002, rv: 0.25 });
+          V("triangle", 210, t, 0.12, { f2: 120, g: g * 0.8, a: 0.002 });
+        };
+        const pluck = (t, m, g = 0.05, p = 0) =>
+          V("sawtooth", mf(m), t, 0.28, { g, a: 0.002, lp: 4200, lp2: 500, q: 3, p, dl: 0.35, rv: 0.2 });
+        const bass = (t, m, d, g = 0.2) => {
+          V("sine", mf(m), t, d, { g, a: 0.01, rel: 0.12 });
+          V("triangle", mf(m), t, d, { g: g * 0.3, a: 0.01, lp: 500, rel: 0.12 });
+        };
+        const pad = (t, d, ms, g = 0.05) =>
+          ms.forEach((m, i) =>
+            [-7, 7].forEach((dt) =>
+              V("sawtooth", mf(m), t, d + 1.6, {
+                g: g * 0.7,
+                a: 1.4,
+                rel: 1.6,
+                det: dt,
+                lp: 700 + i * 120,
+                lp2: 1400,
+                q: 0.8,
+                p: (i - 1.5) * 0.35,
+                rv: 0.5,
+              }),
+            ),
+          );
+        const typ = (t0, n, cps, g) => {
+          for (let k = 0; k < n; k += 2) at(t0 + k / cps, () => key(t0 + k / cps, g));
+        };
+        const CH = {
+            Dm: [50, 53, 57, 62],
+            Bb: [46, 50, 53, 58],
+            F: [53, 57, 60, 65],
+            C: [48, 52, 55, 60],
+            D: [50, 54, 57, 64],
+          },
+          RT = { Dm: 38, Bb: 34, F: 41, C: 36, D: 38 },
+          nm = ["Dm", "Bb", "F", "C"],
+          prog = [];
+        for (let i = 0; i < 19; i++) prog.push([i * 4.8, nm[i % 4], 4.8]);
+        prog.push([91.2, "C", 7.2], [98.4, "Dm", 2.4], [100.8, "Bb", 2.4], [103.2, "D", 3.4]);
+        prog.forEach(([t, n, d]) =>
+          at(t, () => pad(t, d, CH[n], t < 8 ? 0.04 : t < 72 ? 0.05 : t < 85 ? 0.065 : 0.06)),
+        );
+        const chordAt = (t) => {
+          for (let i = prog.length - 1; i >= 0; i--) if (t >= prog[i][0]) return prog[i][1];
+        };
+        const P = (t) =>
+          t < 7.2
+            ? {}
+            : t < 12
+              ? { k: 0.5, b: 1 }
+              : t < 20
+                ? { k: 0.7, h: 1, a: 1, b: 1 }
+                : t < 35
+                  ? { k: 1, h: 2, a: 2, b: 2 }
+                  : t < 37.2
+                    ? { a: 1, b: 1 }
+                    : t < 48
+                      ? { k: 0.9, h: 2, a: 2, b: 2 }
+                      : t < 72
+                        ? { k: 1, h: 2, s: 1, a: 2, b: 2 }
+                        : t < 85
+                          ? { k: 0.45, h: 1, a: 1, b: 1 }
+                          : t < 92
+                            ? { k: 0.9, h: 2, a: 2, b: 2, s: 1 }
+                            : t < 98
+                              ? { k: 1, h: 2, a: 2, b: 2 }
+                              : t < 98.4
+                                ? {}
+                                : t < 103.2
+                                  ? { kb: 1, a: 1, b: 1 }
+                                  : { a: 3 };
+        for (let n = 0; n * 0.15 < T - 1; n++) {
+          const t = +(n * 0.15).toFixed(3),
+            p = P(t),
+            k = n % 16,
+            c = chordAt(t),
+            r = RT[c],
+            ch = CH[c],
+            af = t > 103.2 ? Math.max(0, 1 - (t - 103.2) / 4) : 1;
+          if (p.k && k % 4 == 0) at(t, () => kick(t, 0.4 * p.k));
+          if (p.kb && k == 0) at(t, () => kick(t, 0.3));
+          if (p.h == 1 && k % 4 == 2) at(t, () => hat(t, 0.035));
+          if (p.h == 2) at(t, () => hat(t, k % 4 == 2 ? 0.04 : 0.016));
+          if (p.s == 1 && (k == 4 || k == 12)) at(t, () => snare(t));
+          if (p.a && p.a < 3 && (p.a == 1 ? k % 2 == 0 : k % 8 != 5)) {
+            const m = ch[[0, 1, 2, 3, 2, 1, 3, 2][k % 8]] + (k % 16 < 8 ? 12 : 24),
+              g = (p.a == 1 ? 0.03 : 0.026) * (t < 20 ? 0.7 : 1);
+            at(t, () => pluck(t, m, g, ((k % 7) - 3) * 0.18));
+          }
+          if (p.a == 3 && k % 4 == 0 && af > 0)
+            at(t, () => pluck(t, ch[(n >> 2) % 4] + 24, 0.03 * af, (((n >> 2) % 3) - 1) * 0.4));
+          if (p.b == 1 && k == 0) at(t, () => bass(t, r, 1.3, 0.17));
+          if (p.b == 2 && [0, 3, 5, 8, 11, 13].includes(k))
+            at(t, () => bass(t, r + (k == 11 || k == 13 ? 12 : 0), 0.34, 0.17));
+        }
+        const roll = (() => {
+          let tt = 94.8,
+            dd = 0.32,
+            a = [];
+          while (tt < 98) {
+            a.push(tt);
+            dd = Math.max(0.06, dd * 0.9);
+            tt += dd;
+          }
+          return a;
+        })();
+        roll.forEach((t, i) => at(t, () => snare(t, 0.05 + (0.07 * i) / roll.length)));
+        at(0, () => {
+          N(0, 8, { ty: "lowpass", f: 70, f2: 140, q: 0.7, g: 0.3, pa: 0.8, rv: 0.3 });
+          V("sine", 36, 0, 8.5, { g: 0.12, pa: 0.4, rel: 3 });
+        });
+        IMP.forEach(([t, s]) => {
+          at(t, () => imp(t, s));
+          at(t - 1.4, () => rise(t - 1.4, t - 0.05, 0.07 + 0.03 * s));
+        });
+        at(3.6, () => sweep(3.6, 1.6, 2000, 9000, 0.05));
+        [5.4, 6, 6.6].forEach((t, i) =>
+          at(t, () => {
+            chime(t, [74, 77, 81][i], 0.07);
+            kick(t, 0.3);
+          }),
+        );
+        [8.6, 10.4, 14].forEach((t) => at(t, () => sweep(t, 0.7, 500, 3500, 0.07)));
+        typ(9.8, 108, 30, 0.04);
+        [9, 10, 11].forEach((t, i) => at(t, () => tick(t, 2200 + i * 400)));
+        [15, 16.3, 17.6, 18.9].forEach((t, i) =>
+          at(t, () => {
+            tick(t, 3200);
+            chime(t, [62, 65, 69, 74][i], 0.05);
+          }),
+        );
+        S3.forEach((t, i) => {
+          at(t, () => {
+            tick(t, 2400);
+            chime(t, [62, 65, 69, 72, 74][i], 0.06);
+            sweep(t - 0.2, 0.7, 600, 3500, 0.07);
+          });
+          typ(t + 0.3, 50, 40, 0.035);
+        });
+        at(35.4, () => chime(35.4, 62, 0.07));
+        const PEN = [62, 65, 67, 69, 72, 74, 77, 79, 81, 84, 86, 89, 91, 93];
+        let ci = 0;
+        CLU.forEach((cu, i) => {
+          at(CL[i], () =>
+            sweep(CL[i], 0.6, 800, 4000, 0.06, i % 2 ? 0.8 : -0.8, i % 2 ? -0.8 : 0.8),
+          );
+          cu[3].forEach((_, j) => {
+            const t = CL[i] + 0.8 + j * 0.35,
+              m = PEN[ci++];
+            at(t, () => {
+              pluck(t, m, 0.06, i % 2 ? 0.5 : -0.5);
+              tick(t, 3400, 0.03);
+            });
+          });
+        });
+        [59.7, 66].forEach((t) =>
+          at(t - 0.3, () => {
+            sweep(t - 0.3, 1, 300, 5000, 0.1);
+            imp(t, 0.4);
+          }),
+        );
+        KAN.slice(0, 3).forEach((t, i) =>
+          at(t, () => {
+            sweep(t, 0.5, 500, 3000, 0.07);
+            tick(t, 2800);
+          }),
+        );
+        at(KAN[2] + 0.7, () => chime(KAN[2] + 0.7, 76, 0.07));
+        at(KAN[3], () => {
+          sweep(KAN[3], 0.6, 500, 3500, 0.08);
+          pluck(KAN[3] + 0.3, 81, 0.06);
+        });
+        at(KAN[3] + 1.6, () => chime(KAN[3] + 1.6, 81, 0.08));
+        [60.2, 60.6, 61].forEach((t, i) => at(t, () => tick(t, 1800 + i * 500)));
+        [ARI[0], ARI[2], ARI[4]].forEach((t) => at(t, () => sweep(t, 0.7, 3000, 500, 0.07)));
+        [ARI[1], ARI[3]].forEach((t) =>
+          at(t, () => {
+            N(t, 0.18, { f: 900, q: 0.8, g: 0.07, a: 0.002, p0: -0.6, p1: 0.6 });
+            V("square", 440, t, 0.25, { f2: 90, g: 0.04, lp: 1500 });
+          }),
+        );
+        at(ARI[4] + 0.7, () => {
+          chime(ARI[4] + 0.7, 81, 0.09);
+          chime(ARI[4] + 0.7, 74, 0.05);
+        });
+        JOB.forEach((t, i) =>
+          at(t, () => {
+            tick(t, 2000 + i * 350);
+            pluck(t, [62, 65, 69, 74][i], 0.05);
+          }),
+        );
+        at(69.4, () => {
+          sweep(69.4, 1.6, 300, 6000, 0.08);
+        });
+        at(70.8, () => chime(70.8, 81, 0.07));
+        ST6.forEach((t, i) =>
+          at(t, () => {
+            kick(t, 0.4);
+            sweep(t - 0.1, 0.8, 300, 2500, 0.07);
+            chime(t, [55, 57, 60, 62][i], 0.06);
+          }),
+        );
+        [79.2, 79.9, 80.6].forEach((t) => at(t, () => tick(t, 3400)));
+        at(81, () => chime(81, 76, 0.08));
+        at(81.8, () => sweep(81.8, 2, 300, 3000, 0.06));
+        SV.forEach((t, i) =>
+          at(t, () => {
+            tick(t, 2600);
+            chime(t, [69, 72, 74, 76, 79][i], 0.05);
+            sweep(t - 0.1, 0.5, 800, 4000, 0.05);
+          }),
+        );
+        at(91.4, () => chime(91.4, 81, 0.07));
+        for (let i = 0; i < 22; i++) {
+          const t = 99 + i * 0.07;
+          at(t, () => tick(t, 1600 + i * 140, 0.03, i % 2 ? 0.4 : -0.4));
+        }
+        typ(101.6, 21, 22, 0.045);
+        at(102.8, () => sweep(102.8, 0.7, 800, 4000, 0.06));
+        at(103.2, () => {
+          chime(103.2, 74, 0.1);
+          V("sine", mf(26), 103.2, 4.4, { g: 0.2, a: 0.05, rel: 2 });
+          chime(103.6, 81, 0.06);
+          chime(104.4, 78, 0.05);
+        });
+        at(T - 1.4, () => mix.gain.setTargetAtTime(0.0001, B + T - 1.4, 0.3));
+        E.sort((a, b) => a[0] - b[0]);
+        return {
+          run(base, upto) {
+            B = base;
+            while (ix < E.length && E[ix][0] < upto) E[ix++][1]();
+          },
+        };
+      }
+
+      // ---- player controls & responsive fit ----
+      const EXP = /[?&]export/.test(location.search),
+        cv = document.getElementById("c"),
+        g2 = cv.getContext("2d"),
+        $ = (id) => document.getElementById(id);
+      let ac,
+        mg,
+        au,
+        base,
+        raf,
+        pump,
+        muted = false,
+        cur = 4.6;
+
+      function fit() {
+        const d = devicePixelRatio || 1,
+          r = cv.getBoundingClientRect(),
+          w = EXP ? W : Math.max(640, Math.min(W, Math.round(r.width * d)));
+        cv.width = w;
+        cv.height = Math.round((w * 9) / 16);
+        g2.setTransform(w / W, 0, 0, w / W, 0, 0);
+        draw(g2, cur);
+      }
+      addEventListener("resize", fit);
+
+      const fmt = (s) => Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+
+      function stop() {
+        clearInterval(pump);
+        cancelAnimationFrame(raf);
+        if (ac) ac.close().catch(() => {});
+        ac = null;
+      }
+
+      async function start() {
+        stop();
+        $("go").style.display = "none";
+        ac = new (window.AudioContext || window.webkitAudioContext)();
+        await ac.resume();
+        mg = ac.createGain();
+        mg.gain.value = muted ? 0 : 1;
+        mg.connect(ac.destination);
+        au = buildAudio(ac, mg);
+        base = ac.currentTime + 0.3;
+        au.run(base, 4);
+        pump = setInterval(() => au.run(base, ac.currentTime - base + 4), 150);
+        const my = ac;
+        (function f() {
+          if (ac !== my) return;
+          const t = Math.max(0, ac.currentTime - base - (ac.outputLatency || 0));
+          cur = Math.min(t, T);
+          draw(g2, cur);
+          $("pf").style.width = (cur / T) * 100 + "%";
+          $("tm").textContent = fmt(cur) + " / " + fmt(T);
+          if (t >= T + 0.2) {
+            clearInterval(pump);
+            return;
+          }
+          raf = requestAnimationFrame(f);
+        })();
+      }
+
+      $("play").onclick = start;
+      $("rp").onclick = start;
+      $("mu").onclick = () => {
+        muted = !muted;
+        if (mg) mg.gain.setTargetAtTime(muted ? 0 : 1, ac.currentTime, 0.05);
+        $("mu").textContent = muted ? "🔇 Muted" : "🔊 Sound on";
+      };
+
+      if (EXP) {
+        document.body.className = "x";
+        window.__frame = (t) => {
+          draw(g2, t);
+          return cv.toDataURL("image/jpeg", 0.94);
+        };
+        window.__audio = async () => {
+          const sr = 44100,
+            oc = new OfflineAudioContext(2, sr * T, sr),
+            a = buildAudio(oc, oc.destination);
+          a.run(0, T + 3);
+          const b = await oc.startRendering(),
+            L = b.getChannelData(0),
+            Rr = b.getChannelData(1),
+            n = L.length,
+            u = new DataView(new ArrayBuffer(44 + n * 4)),
+            w = (o, s) => [...s].forEach((ch, i) => u.setUint8(o + i, ch.charCodeAt(0)));
+          w(0, "RIFF");
+          u.setUint32(4, 36 + n * 4, true);
+          w(8, "WAVEfmt ");
+          u.setUint32(16, 16, true);
+          u.setUint16(20, 1, true);
+          u.setUint16(22, 2, true);
+          u.setUint32(24, sr, true);
+          u.setUint32(28, sr * 4, true);
+          u.setUint16(32, 4, true);
+          u.setUint16(34, 16, true);
+          w(36, "data");
+          u.setUint32(40, n * 4, true);
+          for (let i = 0; i < n; i++) {
+            u.setInt16(44 + i * 4, cl(L[i], -1, 1) * 32767, true);
+            u.setInt16(46 + i * 4, cl(Rr[i], -1, 1) * 32767, true);
+          }
+          const by = new Uint8Array(u.buffer);
+          let s = "";
+          for (let i = 0; i < by.length; i += 32768)
+            s += String.fromCharCode.apply(null, by.subarray(i, i + 32768));
+          return btoa(s);
+        };
+      }
+
+      fit();
+    </script>
+  </body>
+</html>

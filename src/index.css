@@ -6,11 +6,11 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
   body {
     @apply bg-paper text-ink font-sans antialiased selection:bg-teal-soft selection:text-ink;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
   :focus-visible {
     outline: 2px solid #0B6E75;
@@ -31,3 +31,90 @@
     }
   }
 }
+
+/* Subtle rotating neon accent for About Me header link */
+.about-neon-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 0 6px rgba(34, 211, 238, 0.18);
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.about-neon-link:hover {
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.35), 0 0 6px rgba(139, 92, 246, 0.25);
+  transform: translateY(-0.5px);
+}
+
+.about-neon-link:active {
+  transform: translateY(0);
+}
+
+.about-neon-border-wrapper {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.about-neon-track {
+  position: absolute;
+  inset: -150%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(34, 211, 238, 0.9) 70deg,
+    rgba(139, 92, 246, 0.9) 130deg,
+    transparent 190deg
+  );
+  animation: about-neon-rotate 4s linear infinite;
+  pointer-events: none;
+}
+
+.about-neon-inner {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border-radius: 9999px;
+  background: #EAF5F5;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #08565B;
+  line-height: 1.25;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.about-neon-link:hover .about-neon-inner {
+  background: #DCEEEF;
+  color: #0E1A2B;
+}
+
+@keyframes about-neon-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-neon-track {
+    animation: none;
+    transform: none;
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.6), rgba(139, 92, 246, 0.6));
+  }
+  .about-neon-link:hover {
+    transform: none;
+  }
+}
+
